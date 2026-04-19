@@ -1,0 +1,40 @@
+image: node:24
+
+stages:
+  - test
+  - build
+
+default:
+  cache:
+    key:
+      files:
+        - backend/package-lock.json
+        - frontend/package-lock.json
+    paths:
+      - backend/node_modules/
+      - frontend/node_modules/
+
+backend_test:
+  stage: test
+  script:
+    - cd backend
+    - npm ci
+    - npm test
+
+frontend_lint:
+  stage: test
+  script:
+    - cd frontend
+    - npm ci
+    - npm run lint
+
+frontend_build:
+  stage: build
+  script:
+    - cd frontend
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - frontend/dist/
+    expire_in: 1 week
