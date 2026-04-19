@@ -1,93 +1,222 @@
 # PlanEat
 
+PlanEat is a full-stack web application concept for planning meals, organizing food choices, and building a smoother day-to-day eating routine.
 
+The idea behind the project is simple: help users decide what to eat, plan ahead, and eventually manage meals in a more structured way instead of making last-minute choices every day.
 
-## Getting started
+## Project overview
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+This repository contains a separate frontend and backend:
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+- `frontend` is a React application built with Vite
+- `backend` is a Node.js and Express API
 
-## Add your files
+The long-term goal of PlanEat is to become a meal-planning platform where users can:
 
-* [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-* [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- create and manage meal plans
+- browse or save meal ideas
+- organize meals for different days
+- connect food planning with user accounts and stored data
 
+## Why this project exists
+
+Meal planning is a common problem for students, families, and busy professionals. People often know they want to eat better or save time, but they do not always have a simple system for deciding what to cook or eat.
+
+PlanEat is intended to solve that by combining a clean frontend experience with a backend that can manage user data, future meal entries, and application logic.
+
+## Current state
+
+The project is currently in the setup and foundation stage.
+
+What is already in place:
+
+- a Vite + React frontend structure
+- a Node.js + Express backend structure
+- environment variable support with `dotenv`
+- MongoDB connection support with `mongoose`
+- basic backend middleware setup for JSON handling and CORS
+- health-check style API routes
+
+What is not finished yet:
+
+- real application pages in the frontend
+- authentication flow
+- database models
+- controllers and business logic
+- production-ready API routes
+
+## Planned features
+
+The following features represent the intended direction of the project:
+
+- user registration and login
+- personalized meal planning
+- daily and weekly meal schedules
+- saved meals or favorite dishes
+- backend data persistence with MongoDB
+- frontend integration with API endpoints
+- responsive design for desktop and mobile use
+
+## Tech stack
+
+### Frontend
+
+- React
+- Vite
+- React Router DOM
+- Axios
+
+### Backend
+
+- Node.js
+- Express
+- Mongoose
+- dotenv
+- CORS
+- bcryptjs
+- jsonwebtoken
+
+### Database
+
+- MongoDB
+
+## Project structure
+
+```text
+planeat/
+|-- backend/
+|   |-- server.js
+|   |-- package.json
+|   |-- package-lock.json
+|   `-- .env.example
+|-- frontend/
+|   |-- public/
+|   |-- src/
+|   |-- package.json
+|   `-- package-lock.json
+`-- README.md
 ```
-cd existing_repo
-git remote add origin https://gitlab.lnu.se/1dv613/student/tt222yi/workspace/planeat.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+## How the app is organized
 
-* [Set up project integrations](https://gitlab.lnu.se/1dv613/student/tt222yi/workspace/planeat/-/settings/integrations)
+The frontend is responsible for the user interface and user interactions.
 
-## Collaborate with your team
+The backend is responsible for:
 
-* [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-* [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-* [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-* [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-* [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+- exposing API endpoints
+- handling future business logic
+- connecting to MongoDB
+- managing secure server-side behavior
 
-## Test and Deploy
+This separation makes it easier to scale the project and develop the client and server independently.
 
-Use the built-in continuous integration in GitLab.
+## Requirements
 
-* [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-* [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-* [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-* [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-* [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Before running the project, make sure you have:
 
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Node.js 18 or newer
+- npm
+- MongoDB installed locally, or a remote MongoDB connection string
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+Dependencies are installed separately for the frontend and backend.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+### Backend
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```bash
+cd backend
+npm install
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+### Frontend
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+```bash
+cd frontend
+npm install
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+## Environment variables
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Inside `backend`, create a `.env` file based on `.env.example`.
 
-## License
-For open source projects, say how it is licensed.
+Example:
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+```env
+PORT=5000
+CLIENT_URL=http://localhost:5173
+MONGO_URI=mongodb://127.0.0.1:27017/planeat
+```
+
+Variable descriptions:
+
+- `PORT` sets the backend server port
+- `CLIENT_URL` allows the frontend to access the backend through CORS
+- `MONGO_URI` is the MongoDB connection string
+
+## Running the project
+
+Use two terminals so the frontend and backend can run at the same time.
+
+### Start the backend
+
+```bash
+cd backend
+npm run dev
+```
+
+By default, the backend runs at `http://localhost:5000`.
+
+Available base endpoints:
+
+- `GET /`
+- `GET /api/health`
+
+### Start the frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+By default, the frontend runs at `http://localhost:5173`.
+
+## Available scripts
+
+### Backend scripts
+
+```bash
+npm run dev
+npm start
+npm test
+```
+
+### Frontend scripts
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run preview
+```
+
+## Backend notes
+
+- The backend entry point is `backend/server.js`
+- The backend can start even if `MONGO_URI` is missing
+- When MongoDB is not configured, the health route reports that the database is not connected
+- CORS is configured through `CLIENT_URL`
+
+## Development roadmap
+
+- build actual PlanEat pages in the frontend
+- add authentication routes and JWT handling
+- create MongoDB models for users and meals
+- add controllers and route modules
+- connect frontend forms to backend APIs
+- improve styling and user experience
+- add validation, error handling, and tests
+
+## Summary
+
+PlanEat is a promising full-stack starter for a meal-planning application. The technical foundation is now separated into frontend and backend apps, and the next phase is turning that setup into a real product with user-facing features and persistent data.
