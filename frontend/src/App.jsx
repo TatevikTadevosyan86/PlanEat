@@ -1,17 +1,8 @@
 import './App.css'
+import Home from './pages/Home.jsx'
 
 function App() {
-  return (
-    <main className="app">
-      <section className="hero">
-        <p className="eyebrow">Frontend setup complete</p>
-        <h1>PlanEat</h1>
-        <p className="description">
-          This is a clean starting point for building the application.
-        </p>
-      </section>
-    </main>
-  )
+  return <Home />
 }
 
 export default App
