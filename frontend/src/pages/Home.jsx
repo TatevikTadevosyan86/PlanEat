@@ -4,7 +4,21 @@ import AddIngredient from "../components/AddIngredient.jsx"
 function Home() {
   const [ingredientName, setIngredientName] = useState("")
   const[ingredients, setIngredients] = useState([])
-  
+
+  function handleAddIngredient(event) {
+    event.preventDefault()
+   
+    const trimmedName = ingredientName.trim()
+    if(!trimmedName){
+      return
+    }
+    const newIngredient = {
+      id: Date.now(),
+    name: trimmedName,
+    }
+    setIngredients=((currentIngredients) => [...currentIngredients, newIngredient])
+    setIngredientName("")
+  }
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
