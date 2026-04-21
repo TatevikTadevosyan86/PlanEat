@@ -63,6 +63,11 @@ function Home() {
     </ul>
   </article>
 </section>
+<div className="mt-8">
+  <button className="rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white">
+    Continue to Add Ingredients
+  </button>
+</div>
 
   </div>
 </main>
