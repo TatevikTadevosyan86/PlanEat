@@ -16,7 +16,7 @@ function Home() {
       id: Date.now(),
     name: trimmedName,
     }
-    setIngredients=((currentIngredients) => [...currentIngredients, newIngredient])
+    setIngredients((currentIngredients) => [...currentIngredients, newIngredient])
     setIngredientName("")
   }
   return (
