@@ -2,7 +2,7 @@ function Home() {
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col">
-        <header>
+        
           <header className="border-b border-[#dbe7de] bg-white">
   <div className="flex items-center justify-between px-6 py-4">
     <div className="flex items-center gap-3">
@@ -20,7 +20,7 @@ function Home() {
   </div>
 </header>
 
-        </header>
+        
 
         <main className="flex-1 px-6 py-10">
   <div className="mx-auto max-w-6xl">
