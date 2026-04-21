@@ -1,4 +1,10 @@
+import { useState } from "react"
+import AddIngredient from "../components/AddIngredient.jsx"
+
 function Home() {
+  const [ingredientName, setIngredientName] = useState("")
+  const[ingredients, setIngredients] = useState([])
+  
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
