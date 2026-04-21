@@ -78,7 +78,7 @@ function Home() {
 </section>
 <section className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
   <article className="rounded-3xl bg-white p-8 shadow-sm">
-    <>
+    
   <h3 className="text-2xl font-semibold text-[#1f5c4d]">Ingredient Name</h3>
 
   <input
@@ -117,12 +117,12 @@ function Home() {
   <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
     Add Ingredient
   </button>
-</>
+
 
   </article>
 
   <article className="rounded-3xl bg-white p-8 shadow-sm">
-    <>
+    
   <h3 className="text-2xl font-semibold text-[#1f5c4d]">
     Your Ingredients (1)
   </h3>
@@ -135,7 +135,7 @@ function Home() {
   <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
     Generate Meal Plan
   </button>
-</>
+
 
   </article>
 </section>
