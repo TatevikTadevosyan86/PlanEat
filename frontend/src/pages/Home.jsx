@@ -122,7 +122,21 @@ function Home() {
   </article>
 
   <article className="rounded-3xl bg-white p-8 shadow-sm">
-    Right card
+    <>
+  <h3 className="text-2xl font-semibold text-[#1f5c4d]">
+    Your Ingredients (1)
+  </h3>
+
+  <div className="mt-5 rounded-2xl bg-[#f6f9f7] p-4">
+    <p className="text-xl text-[#1f5c4d]">Rice</p>
+    <p className="mt-1 text-lg text-[#8ba095]">Leftover - Boiled</p>
+  </div>
+
+  <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
+    Generate Meal Plan
+  </button>
+</>
+
   </article>
 </section>
 
