@@ -68,6 +68,23 @@ function Home() {
     Continue to Add Ingredients
   </button>
 </div>
+<section className="mt-16">
+  <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+    Add Ingredients
+  </h2>
+  <p className="mt-3 text-xl text-[#8ba095]">
+    Build your inventory to generate meal plans
+  </p>
+</section>
+<section className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+  <article className="rounded-3xl bg-white p-8 shadow-sm">
+    Left card
+  </article>
+
+  <article className="rounded-3xl bg-white p-8 shadow-sm">
+    Right card
+  </article>
+</section>
 
   </div>
 </main>
