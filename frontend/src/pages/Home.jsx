@@ -78,7 +78,47 @@ function Home() {
 </section>
 <section className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
   <article className="rounded-3xl bg-white p-8 shadow-sm">
-    Left card
+    <>
+  <h3 className="text-2xl font-semibold text-[#1f5c4d]">Ingredient Name</h3>
+
+  <input
+    type="text"
+    placeholder="Enter ingredient name"
+    className="mt-4 w-full rounded-2xl border border-[#d9e7dd] px-5 py-4 text-lg text-[#1f5c4d] outline-none placeholder:text-[#a0ada6]"
+  />
+
+  <div className="mt-6">
+    <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">Type</p>
+    <div className="grid grid-cols-2 gap-3">
+      <button className="rounded-2xl border border-[#d9e7dd] px-4 py-3 text-lg text-[#1f5c4d]">
+        Fresh
+      </button>
+      <button className="rounded-2xl border-2 border-[#2b6a58] bg-[#e3f0e7] px-4 py-3 text-lg font-medium text-[#1f5c4d]">
+        Leftover
+      </button>
+    </div>
+  </div>
+
+  <div className="mt-6">
+    <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">State</p>
+    <div className="grid grid-cols-2 gap-3">
+      <button className="rounded-2xl border-2 border-[#2b6a58] bg-[#e3f0e7] px-4 py-3 text-lg font-medium text-[#1f5c4d]">
+        Boiled
+      </button>
+      <button className="rounded-2xl border border-[#d9e7dd] px-4 py-3 text-lg text-[#1f5c4d]">
+        Baked
+      </button>
+      <button className="rounded-2xl border border-[#d9e7dd] px-4 py-3 text-lg text-[#1f5c4d]">
+        Fried
+      </button>
+    </div>
+  </div>
+
+  <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
+    Add Ingredient
+  </button>
+</>
+
   </article>
 
   <article className="rounded-3xl bg-white p-8 shadow-sm">
