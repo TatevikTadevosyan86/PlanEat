@@ -32,6 +32,37 @@ function Home() {
     Select how you want to plan your meals
   </p>
 </section>
+<section className="grid gap-6 lg:grid-cols-2">
+  <article className="rounded-3xl bg-white p-8 shadow-sm">
+    <h2 className="text-3xl font-semibold text-[#1f5c4d]">Smart Mode</h2>
+    <p className="mt-4 text-lg leading-8 text-[#7f958a]">
+      Batch cooking that reuses the same cooked ingredients across several
+      days. Save time and money by cooking once and eating multiple times.
+    </p>
+
+    <ul className="mt-6 space-y-3 text-lg text-[#2e6d5b]">
+      <li>✓ Save time cooking</li>
+      <li>✓ Reduce food waste</li>
+      <li>✓ Lower grocery costs</li>
+      <li>✓ Batch cooking efficiency</li>
+    </ul>
+  </article>
+
+  <article className="rounded-3xl bg-white p-8 shadow-sm">
+    <h2 className="text-3xl font-semibold text-[#1f5c4d]">Fresh Mode</h2>
+    <p className="mt-4 text-lg leading-8 text-[#7f958a]">
+      Generate variety in your meals with fresh, diverse recipes every day.
+      Perfect for those who love trying new dishes.
+    </p>
+
+    <ul className="mt-6 space-y-3 text-lg text-[#2e6d5b]">
+      <li>✓ Daily variety</li>
+      <li>✓ New flavors</li>
+      <li>✓ Creative cooking</li>
+      <li>✓ Fresh ingredients daily</li>
+    </ul>
+  </article>
+</section>
 
   </div>
 </main>
