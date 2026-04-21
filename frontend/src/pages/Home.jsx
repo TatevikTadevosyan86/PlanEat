@@ -1,20 +1,48 @@
 function Home() {
   return (
-    <main className="min-h-screen grid place-items-center px-8">
-      <section className="max-w-2xl text-center">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.12em] text-slate-500">
-          Frontend setup complete
-        </p>
-        <h1 className="text-5xl font-bold text-slate-900 md:text-7xl">
-          PlanEat
-        </h1>
-        <p className="mt-4 text-lg leading-7 text-slate-600">
-          This is a clean starting point for building the application.
-        </p>
-      </section>
-    </main>
+    <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col">
+        <header>
+          <header className="border-b border-[#dbe7de] bg-white">
+  <div className="flex items-center justify-between px-6 py-4">
+    <div className="flex items-center gap-3">
+      <div className="h-8 w-8 rounded bg-[#dcebe0]" />
+      <span className="text-2xl font-medium text-[#1f5c4d]">PlanEat</span>
+    </div>
+
+    <nav className="hidden items-center gap-10 text-xl font-medium text-[#7c9488] md:flex">
+      <a className="rounded-xl bg-[#dcebe0] px-5 py-2 text-[#1f5c4d]">Home</a>
+      <a>Meal Plan</a>
+      <a>Inventory</a>
+      <a>Add</a>
+      <a>Shopping List</a>
+    </nav>
+  </div>
+</header>
+
+        </header>
+
+        <main className="flex-1 px-6 py-10">
+  <div className="mx-auto max-w-6xl">
+    <section className="mb-10">
+  <h1 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+    Choose Your Cooking Mode
+  </h1>
+  <p className="mt-3 text-xl text-[#8ba095]">
+    Select how you want to plan your meals
+  </p>
+</section>
+
+  </div>
+</main>
+
+
+        <footer>
+          Footer goes here
+        </footer>
+      </div>
+    </div>
   )
 }
-
 
 export default Home
