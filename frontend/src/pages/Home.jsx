@@ -144,9 +144,14 @@ function Home() {
 </main>
 
 
-        <footer>
-          Footer goes here
-        </footer>
+        <footer className="mt-16 border-t border-[#dbe7de] bg-white px-6 py-6">
+  <div className="mx-auto grid max-w-6xl gap-6 text-center text-2xl font-medium text-[#1f5c4d] md:grid-cols-3">
+    <p>PlanEat</p>
+    <p>Quick Links</p>
+    <p>Support</p>
+  </div>
+</footer>
+
       </div>
     </div>
   )
