@@ -1,9 +1,7 @@
 function AddIngredient({ ingredientName, setIngredientName, onAddIngredient }) {
   return (
     <article className="rounded-3xl bg-white p-8 shadow-sm">
-      <h3 className="text-2xl font-semibold text-[#1f5c4d]">
-        Ingredient Name
-      </h3>
+      <h3 className="text-2xl font-semibold text-[#1f5c4d]">Ingredient Name</h3>
 
       <form className="mt-4" onSubmit={onAddIngredient}>
         <input

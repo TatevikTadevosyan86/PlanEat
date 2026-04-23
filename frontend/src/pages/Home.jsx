@@ -1,23 +1,26 @@
-import { useState } from "react"
-import AddIngredient from "../components/AddIngredient.jsx"
+import { useState } from 'react'
+import AddIngredient from '../components/AddIngredient.jsx'
 
 function Home() {
-  const [ingredientName, setIngredientName] = useState("")
-  const[ingredients, setIngredients] = useState([])
+  const [ingredientName, setIngredientName] = useState('')
+  const [ingredients, setIngredients] = useState([])
 
   function handleAddIngredient(event) {
     event.preventDefault()
-   
+
     const trimmedName = ingredientName.trim()
-    if(!trimmedName){
+    if (!trimmedName) {
       return
     }
     const newIngredient = {
       id: Date.now(),
-    name: trimmedName,
+      name: trimmedName,
     }
-    setIngredients((currentIngredients) => [...currentIngredients, newIngredient])
-    setIngredientName("")
+    setIngredients((currentIngredients) => [
+      ...currentIngredients,
+      newIngredient,
+    ])
+    setIngredientName('')
   }
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
@@ -26,11 +29,15 @@ function Home() {
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 rounded bg-[#dcebe0]" />
-              <span className="text-2xl font-medium text-[#1f5c4d]">PlanEat</span>
+              <span className="text-2xl font-medium text-[#1f5c4d]">
+                PlanEat
+              </span>
             </div>
 
             <nav className="hidden items-center gap-10 text-xl font-medium text-[#7c9488] md:flex">
-              <a className="rounded-xl bg-[#dcebe0] px-5 py-2 text-[#1f5c4d]">Home</a>
+              <a className="rounded-xl bg-[#dcebe0] px-5 py-2 text-[#1f5c4d]">
+                Home
+              </a>
               <a>Meal Plan</a>
               <a>Inventory</a>
               <a>Add</a>
@@ -52,7 +59,9 @@ function Home() {
 
             <section className="grid gap-6 lg:grid-cols-2">
               <article className="rounded-3xl bg-white p-8 shadow-sm">
-                <h2 className="text-3xl font-semibold text-[#1f5c4d]">Smart Mode</h2>
+                <h2 className="text-3xl font-semibold text-[#1f5c4d]">
+                  Smart Mode
+                </h2>
                 <p className="mt-4 text-lg leading-8 text-[#7f958a]">
                   Batch cooking that reuses the same cooked ingredients across
                   several days. Save time and money by cooking once and eating
@@ -68,7 +77,9 @@ function Home() {
               </article>
 
               <article className="rounded-3xl bg-white p-8 shadow-sm">
-                <h2 className="text-3xl font-semibold text-[#1f5c4d]">Fresh Mode</h2>
+                <h2 className="text-3xl font-semibold text-[#1f5c4d]">
+                  Fresh Mode
+                </h2>
                 <p className="mt-4 text-lg leading-8 text-[#7f958a]">
                   Generate variety in your meals with fresh, diverse recipes
                   every day. Perfect for those who love trying new dishes.
@@ -99,13 +110,11 @@ function Home() {
             </section>
 
             <section className="mt-8 grid gap-6 lg:grid-cols-[1.2fr_1fr]">
-              
               <AddIngredient
-  ingredientName={ingredientName}
-  setIngredientName={setIngredientName}
-  onAddIngredient={handleAddIngredient}
-/>
-
+                ingredientName={ingredientName}
+                setIngredientName={setIngredientName}
+                onAddIngredient={handleAddIngredient}
+              />
 
               <article className="rounded-3xl bg-white p-8 shadow-sm">
                 <h3 className="text-2xl font-semibold text-[#1f5c4d]">
@@ -113,19 +122,25 @@ function Home() {
                 </h3>
 
                 <div className="mt-5 space-y-4">
-  {ingredients.length === 0 ? (
-    <div className="rounded-2xl bg-[#f6f9f7] p-4">
-      <p className="text-lg text-[#8ba095]">No ingredients added yet.</p>
-    </div>
-  ) : (
-    ingredients.map((ingredient) => (
-      <div key={ingredient.id} className="rounded-2xl bg-[#f6f9f7] p-4">
-        <p className="text-xl text-[#1f5c4d]">{ingredient.name}</p>
-      </div>
-    ))
-  )}
-</div>
-
+                  {ingredients.length === 0 ? (
+                    <div className="rounded-2xl bg-[#f6f9f7] p-4">
+                      <p className="text-lg text-[#8ba095]">
+                        No ingredients added yet.
+                      </p>
+                    </div>
+                  ) : (
+                    ingredients.map((ingredient) => (
+                      <div
+                        key={ingredient.id}
+                        className="rounded-2xl bg-[#f6f9f7] p-4"
+                      >
+                        <p className="text-xl text-[#1f5c4d]">
+                          {ingredient.name}
+                        </p>
+                      </div>
+                    ))
+                  )}
+                </div>
 
                 <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
                   Generate Meal Plan
