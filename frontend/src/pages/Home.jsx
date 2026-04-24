@@ -3,6 +3,7 @@ import AddIngredient from '../components/AddIngredient.jsx'
 
 function Home() {
   const [ingredientName, setIngredientName] = useState('')
+  const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
 
   function handleAddIngredient(event) {
@@ -15,12 +16,14 @@ function Home() {
     const newIngredient = {
       id: Date.now(),
       name: trimmedName,
+      type: ingredientType,
     }
     setIngredients((currentIngredients) => [
       ...currentIngredients,
       newIngredient,
     ])
     setIngredientName('')
+    setIngredientType('fresh')
   }
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
@@ -113,6 +116,8 @@ function Home() {
               <AddIngredient
                 ingredientName={ingredientName}
                 setIngredientName={setIngredientName}
+                ingredientType={ingredientType}
+                setIngredientType={setIngredientType}
                 onAddIngredient={handleAddIngredient}
               />
 
@@ -136,6 +141,9 @@ function Home() {
                       >
                         <p className="text-xl text-[#1f5c4d]">
                           {ingredient.name}
+                        </p>
+                        <p className="mt-1 text-lg capitalize text-[#8ba095]">
+                          {ingredient.type}
                         </p>
                       </div>
                     ))
