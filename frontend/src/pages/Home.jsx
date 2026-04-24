@@ -5,7 +5,7 @@ function Home() {
   const [ingredientName, setIngredientName] = useState('')
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
-  const [planingMode, setPlaningMode] = useState('Smart')
+  const [planningMode, setPlanningMode] = useState('smart')
 
   function handleAddIngredient(event) {
     event.preventDefault()
@@ -62,14 +62,14 @@ function Home() {
             </section>
 
             <section className="grid gap-6 lg:grid-cols-2">
-              <article className="rounded-3xl bg-white p-8 shadow-sm">
-                onClick{()=>setPlaningMode('smart')}
+              <article
+                onClick={() => setPlanningMode('smart')}
                 className={`rounded-3xl p-8 shadow-sm cursor-pointer ${
-  planningMode === 'smart'
-    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
-    : 'bg-white'
-}`}
-
+                  planningMode === 'smart'
+                    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
+                    : 'bg-white'
+                }`}
+              >
                 <h2 className="text-3xl font-semibold text-[#1f5c4d]">
                   Smart Mode
                 </h2>
@@ -87,14 +87,14 @@ function Home() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl bg-white p-8 shadow-sm">
-                onClick{()=> setPlaningMode('fresh')}
+              <article
+                onClick={() => setPlanningMode('fresh')}
                 className={`rounded-3xl p-8 shadow-sm cursor-pointer ${
-  planningMode === 'smart'
-    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
-    : 'bg-white'
-}`}
-
+                  planningMode === 'fresh'
+                    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
+                    : 'bg-white'
+                }`}
+              >
                 <h2 className="text-3xl font-semibold text-[#1f5c4d]">
                   Fresh Mode
                 </h2>
@@ -111,9 +111,11 @@ function Home() {
                 </ul>
               </article>
             </section>
-<p className="mt-4 text-lg text-[#1f5c4d]">
-  Current mode: {planningMode === 'smart' ? 'Smart Mode' : 'Fresh Mode'}
-</p>
+
+            <p className="mt-4 text-lg text-[#1f5c4d]">
+              Current mode:{' '}
+              {planningMode === 'smart' ? 'Smart Mode' : 'Fresh Mode'}
+            </p>
 
             <div className="mt-8">
               <button className="rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white">
