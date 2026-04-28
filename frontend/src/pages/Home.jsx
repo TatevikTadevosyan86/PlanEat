@@ -43,9 +43,15 @@ function Home() {
         }
         if (planningMode === 'fresh' && meal.usesLeftover)
           score-=2
+
+        const missingIngredients = meal.ingredients.filter(
+          (ingredient)=>
+            !availableIngredientNames.includes(ingredient.toLowerCase())
+        )
         return {
           ...meal,
           score,
+          missingIngredients,
         }
         })
         const selectedMeals = scoredMeals.
@@ -236,6 +242,13 @@ function Home() {
             <p className="mt-2 text-lg text-[#8ba095]">
               Uses leftovers: {meal.usesLeftover ? 'Yes' : 'No'}
             </p>
+            <p className="mt-2 text-lg text-[#8ba095]">
+  Missing ingredients:{' '}
+  {meal.missingIngredients.length > 0
+    ? meal.missingIngredients.join(', ')
+    : 'None'}
+</p>
+
             <p className="mt-2 text-lg text-[#8ba095]">
   Score: {meal.score}
 </p>
