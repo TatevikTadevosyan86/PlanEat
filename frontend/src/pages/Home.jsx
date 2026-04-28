@@ -31,7 +31,7 @@ function Home() {
   function handleGenerateMealPlan() {
     const availableIngredientNames= ingredients.map((ingredient) => ingredient.name.toLowerCase())
     const scoredMeals = meals.map((meal) => {
-      const score = meal.ingredients.reduce((total, ingredient) => {
+      let score = meal.ingredients.reduce((total, ingredient) => {
         if(availableIngredientNames.includes(ingredient.toLowerCase())){
           return total+2
         } return total -1
