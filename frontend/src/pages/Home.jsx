@@ -30,7 +30,21 @@ function Home() {
   }
   function handleGenerateMealPlan() {
     const availableIngredientNames= ingredients.map((ingredient) => ingredient.name.toLowerCase())
-    const selectedMeals = meals.slice(0,7)
+    const scoredMeals = meals.map((meal) => {
+      const score = meal.ingredients.reduce((total, ingredient) => {
+        if(availableIngredientNames.includes(ingredient.toLowerCase())){
+          return total+2
+        } return total -1
+
+        },0)
+        return {
+          ...meal,
+          score,
+        }
+        })
+        const selectedMeals = scoredMeals.
+        sort((a,b) => b.score -a.score).slice(0,7)
+
     setMealPlan(selectedMeals)
   }
   return (
@@ -216,6 +230,10 @@ function Home() {
             <p className="mt-2 text-lg text-[#8ba095]">
               Uses leftovers: {meal.usesLeftover ? 'Yes' : 'No'}
             </p>
+            <p className="mt-2 text-lg text-[#8ba095]">
+  Score: {meal.score}
+</p>
+
             </div>
       ))}
      </div>
