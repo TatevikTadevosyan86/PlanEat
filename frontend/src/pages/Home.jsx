@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddIngredient from '../components/AddIngredient.jsx'
+import { meals } from '../data/meals.js'
 
 function Home() {
   const [ingredientName, setIngredientName] = useState('')
@@ -116,6 +117,10 @@ function Home() {
               Current mode:{' '}
               {planningMode === 'smart' ? 'Smart Mode' : 'Fresh Mode'}
             </p>
+            <p className="mt-4 text-sm text-[#8ba095]">
+  Available prototype meals: {meals.length}
+</p>
+
 
             <div className="mt-8">
               <button className="rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white">
