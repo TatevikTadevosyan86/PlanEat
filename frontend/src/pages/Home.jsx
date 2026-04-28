@@ -213,10 +213,10 @@ function Home() {
             {meal.name}
            </h3>
            <p className="mt-2 text-lg text-[#8ba095]">
-             Main ingredient:{meal.mainIngredient}
+             Main ingredient: {meal.mainIngredient}
            </p>
             <p className="mt-2 text-lg text-[#8ba095]">
-              Uses leftovers:{meal.usesLeftovers ? 'Yes' : 'No'}
+              Uses leftovers: {meal.usesLeftover ? 'Yes' : 'No'}
             </p>
             </div>
       ))}
