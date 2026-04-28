@@ -2,13 +2,6 @@ export const meals = [
   {
     id: 1,
     name: 'Chicken Rice Bowl',
-    ingredients: ['chicken', 'rice', 'carrot'],
-    mainIngredient: 'chicken',
-    usesLeftover: false,
-  },
-  {
-    id: 1,
-    name: 'Chicken Rice Bowl',
     ingredients: ['chicken', 'rice', 'carrot', 'soy sauce'],
     mainIngredient: 'chicken',
     usesLeftover: false,
@@ -26,7 +19,7 @@ export const meals = [
   },
   {
     id: 3,
-    name: 'Chicken Soup (Leftover)',
+    name: 'Chicken Soup',
     ingredients: ['chicken', 'onion', 'carrot', 'potato', 'broth'],
     mainIngredient: 'chicken',
     usesLeftover: true,
@@ -42,8 +35,6 @@ export const meals = [
     cuisine: 'mexican',
     prepTime: 15,
   },
-
-  // KÖTTFÄRSRÄTTER (4 st)
   {
     id: 5,
     name: 'Spaghetti Bolognese',
@@ -55,8 +46,15 @@ export const meals = [
   },
   {
     id: 6,
-    name: 'Tacos',
-    ingredients: ['ground beef', 'tortilla', 'lettuce', 'tomato', 'cheese', 'salsa'],
+    name: 'Beef Tacos',
+    ingredients: [
+      'ground beef',
+      'tortilla',
+      'lettuce',
+      'tomato',
+      'cheese',
+      'salsa',
+    ],
     mainIngredient: 'ground beef',
     usesLeftover: false,
     cuisine: 'mexican',
@@ -64,7 +62,7 @@ export const meals = [
   },
   {
     id: 7,
-    name: 'Meatball Pasta (Leftover)',
+    name: 'Meatball Pasta',
     ingredients: ['ground beef', 'pasta', 'tomato sauce', 'breadcrumbs'],
     mainIngredient: 'ground beef',
     usesLeftover: true,
@@ -73,15 +71,13 @@ export const meals = [
   },
   {
     id: 8,
-    name: 'Shepherd\'s Pie',
+    name: "Shepherd's Pie",
     ingredients: ['ground beef', 'potato', 'carrot', 'peas', 'onion'],
     mainIngredient: 'ground beef',
     usesLeftover: false,
     cuisine: 'british',
     prepTime: 45,
   },
-
-  // ÄGGRÄTTER (2 st)
   {
     id: 9,
     name: 'Omelette',
@@ -93,31 +89,29 @@ export const meals = [
   },
   {
     id: 10,
-    name: 'Fried Rice (Leftover)',
-    ingredients: ['eggs', 'rice', 'soy sauce', 'vegetables', 'leftover meat'],
-    mainIngredient: 'eggs',
+    name: 'Fried Rice',
+    ingredients: ['rice', 'eggs', 'carrot', 'soy sauce', 'chicken'],
+    mainIngredient: 'rice',
     usesLeftover: true,
     cuisine: 'asian',
     prepTime: 15,
   },
-
-  // VEGETARISKA RÄTTER (2 st)
   {
     id: 11,
     name: 'Tomato Pasta',
     ingredients: ['pasta', 'tomato sauce', 'onion', 'garlic', 'basil'],
-    mainIngredient: 'tomato',
+    mainIngredient: 'pasta',
     usesLeftover: false,
     cuisine: 'italian',
     prepTime: 20,
   },
   {
     id: 12,
-    name: 'Vegetable Soup (Leftover)',
-    ingredients: ['onion', 'carrot', 'potato', 'tomato', 'broth', 'any vegetables'],
-    mainIngredient: 'vegetables',
+    name: 'Vegetable Soup',
+    ingredients: ['onion', 'carrot', 'potato', 'tomato', 'broth'],
+    mainIngredient: 'potato',
     usesLeftover: true,
     cuisine: 'soup',
     prepTime: 25,
-  }
+  },
 ]
