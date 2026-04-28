@@ -37,6 +37,12 @@ function Home() {
         } return total -1
 
         },0)
+
+        if (planningMode === 'smart' && meal.usesLeftover) {
+          score+=3
+        }
+        if (planningMode === 'fresh' && meal.usesLeftover)
+          score-=2
         return {
           ...meal,
           score,
