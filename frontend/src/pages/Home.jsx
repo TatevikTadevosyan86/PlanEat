@@ -192,6 +192,38 @@ function Home() {
 
               </article>
             </section>
+            <section className="mt-16">
+  <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+    Your 7-Day Meal Plan
+  </h2>
+  <p className="mt-3 text-xl text-[#8ba095]">
+    Generated meals based on your current ingredients
+  </p>
+  {mealPlan.length===0 ?(
+    <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
+      <p className="text-lg text-[#8ba095]">
+        No meal plan generated yet. Click "Generate Meal Plan" to create one.
+      </p>
+    </div>
+  ):(
+     <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {mealPlan.map((meal) =>(
+        <div key={meal.id} className="rounded-3xl bg-white p-6 shadow-sm">
+           <h3 className="text-2xl font-semibold text-[#1f5c4d]">
+            {meal.name}
+           </h3>
+           <p className="mt-2 text-lg text-[#8ba095]">
+             Main ingredient:{meal.mainIngredient}
+           </p>
+            <p className="mt-2 text-lg text-[#8ba095]">
+              Uses leftovers:{meal.leftover ? 'Yes' : 'No'}
+            </p>
+            </div>
+      ))}
+     </div>
+  )}
+</section>
+
           </div>
         </main>
 
