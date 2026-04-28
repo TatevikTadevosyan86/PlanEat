@@ -216,7 +216,7 @@ function Home() {
              Main ingredient:{meal.mainIngredient}
            </p>
             <p className="mt-2 text-lg text-[#8ba095]">
-              Uses leftovers:{meal.leftover ? 'Yes' : 'No'}
+              Uses leftovers:{meal.usesLeftovers ? 'Yes' : 'No'}
             </p>
             </div>
       ))}
