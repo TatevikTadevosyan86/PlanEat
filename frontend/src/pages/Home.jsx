@@ -29,7 +29,7 @@ function Home() {
     setIngredientType('fresh')
   }
   function handleGenerateMealPlan() {
-    // Placeholder logic for meal plan generation
+    const availableIngredientNames= ingredients.map((ingredient) => ingredient.name.toLowerCase())
     const selectedMeals = meals.slice(0,7)
     setMealPlan(selectedMeals)
   }
@@ -186,9 +186,7 @@ function Home() {
                 className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
                   Generate Meal Plan
                 </button>
-                <p className="mt-4 text-sm text-[#8ba095]">
-  Generated meals: {mealPlan.length}
-</p>
+                
 
               </article>
             </section>
