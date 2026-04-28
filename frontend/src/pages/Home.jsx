@@ -7,6 +7,7 @@ function Home() {
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
   const [planningMode, setPlanningMode] = useState('smart')
+  const [mealPlan, setMealPlan] = useState([])
 
   function handleAddIngredient(event) {
     event.preventDefault()
@@ -178,6 +179,10 @@ function Home() {
                 <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
                   Generate Meal Plan
                 </button>
+                <p className="mt-4 text-sm text-[#8ba095]">
+  Generated meals: {mealPlan.length}
+</p>
+
               </article>
             </section>
           </div>
