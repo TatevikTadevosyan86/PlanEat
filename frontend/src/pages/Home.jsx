@@ -28,6 +28,11 @@ function Home() {
     setIngredientName('')
     setIngredientType('fresh')
   }
+  function handleGenerateMealPlan() {
+    // Placeholder logic for meal plan generation
+    const selectedMeals = meals.slice(0,7)
+    setMealPlan(selectedMeals)
+  }
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
@@ -176,7 +181,9 @@ function Home() {
                   )}
                 </div>
 
-                <button className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
+                <button 
+                onClick={handleGenerateMealPlan}
+                className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
                   Generate Meal Plan
                 </button>
                 <p className="mt-4 text-sm text-[#8ba095]">
