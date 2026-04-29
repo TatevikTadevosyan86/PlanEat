@@ -8,6 +8,15 @@ function Home() {
   const [ingredients, setIngredients] = useState([])
   const [planningMode, setPlanningMode] = useState('smart')
   const [mealPlan, setMealPlan] = useState([])
+  const weekdays = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ]
 
   function handleAddIngredient(event) {
     event.preventDefault()
@@ -29,45 +38,45 @@ function Home() {
     setIngredientType('fresh')
   }
   function handleGenerateMealPlan() {
-    const availableIngredientNames= ingredients.map((ingredient) => ingredient.name.toLowerCase())
+    const availableIngredientNames = ingredients.map((ingredient) =>
+      ingredient.name.toLowerCase()
+    )
+
     const scoredMeals = meals.map((meal) => {
       let score = meal.ingredients.reduce((total, ingredient) => {
-        if(availableIngredientNames.includes(ingredient.toLowerCase())){
-          return total+2
-        } return total -1
-
-        },0)
-
-        if (planningMode === 'smart' && meal.usesLeftover) {
-          score+=3
+        if (availableIngredientNames.includes(ingredient.toLowerCase())) {
+          return total + 2
         }
-        if (planningMode === 'fresh' && meal.usesLeftover)
-          score-=2
 
-        const missingIngredients = meal.ingredients.filter(
-          (ingredient)=>
-            !availableIngredientNames.includes(ingredient.toLowerCase())
-        )
-        return {
-          ...meal,
-          score,
-          missingIngredients,
-        }
-        })
-        const selectedMeals = scoredMeals.
-        sort((a,b) => b.score -a.score).slice(0,7)
+        return total - 1
+      }, 0)
+
+      if (planningMode === 'smart' && meal.usesLeftover) {
+        score += 3
+      }
+
+      if (planningMode === 'fresh' && meal.usesLeftover) {
+        score -= 2
+      }
+
+      const missingIngredients = meal.ingredients.filter(
+        (ingredient) =>
+          !availableIngredientNames.includes(ingredient.toLowerCase())
+      )
+
+      return {
+        ...meal,
+        score,
+        missingIngredients,
+      }
+    })
+
+    const selectedMeals = scoredMeals
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 7)
 
     setMealPlan(selectedMeals)
   }
-  const weekdays = [
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-  'Sunday',
-]
 
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
@@ -159,7 +168,6 @@ function Home() {
               Current mode:{' '}
               {planningMode === 'smart' ? 'Smart Mode' : 'Fresh Mode'}
             </p>
-            
 
             <div className="mt-8">
               <button className="rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white">
@@ -214,61 +222,89 @@ function Home() {
                   )}
                 </div>
 
-                <button 
-                onClick={handleGenerateMealPlan}
-                className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white">
+                <button
+                  onClick={handleGenerateMealPlan}
+                  className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white"
+                >
                   Generate Meal Plan
                 </button>
-                
-
               </article>
             </section>
             <section className="mt-16">
-  <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
-    Your 7-Day Meal Plan
-  </h2>
-  <p className="mt-3 text-xl text-[#8ba095]">
-    Generated meals based on your current ingredients
-  </p>
-  {mealPlan.length===0 ?(
-    <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
-      <p className="text-lg text-[#8ba095]">
-        No meal plan generated yet. Click "Generate Meal Plan" to create one.
-      </p>
-    </div>
-  ):(
-     <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-      {mealPlan.map((meal, index) =>(
-        <div key={meal.id} className="rounded-3xl bg-white p-6 shadow-sm">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[#8ba095]">
-  {weekdays[index]}
-</p>
+              <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+                Your 7-Day Meal Plan
+              </h2>
+              <p className="mt-3 text-xl text-[#8ba095]">
+                Generated meals based on your current ingredients
+              </p>
+              {mealPlan.length === 0 ? (
+                <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
+                  <p className="text-lg text-[#8ba095]">
+                    No meal plan generated yet. Click &quot;Generate Meal
+                    Plan&quot; to create one.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+                  {mealPlan.map((meal, index) => (
+                    <div
+                      key={meal.id}
+                      className="rounded-3xl border border-[#dbe7de] bg-white p-6 shadow-sm"
+                    >
+                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#8ba095]">
+                        {weekdays[index]}
+                      </p>
 
-           <h3 className="text-2xl font-semibold text-[#1f5c4d]">
-            {meal.name}
-           </h3>
-           <p className="mt-2 text-lg text-[#8ba095]">
-             Main ingredient: {meal.mainIngredient}
-           </p>
-            <p className="mt-2 text-lg text-[#8ba095]">
-              Uses leftovers: {meal.usesLeftover ? 'Yes' : 'No'}
-            </p>
-            <p className="mt-2 text-lg text-[#8ba095]">
-  Missing ingredients:{' '}
-  {meal.missingIngredients.length > 0
-    ? meal.missingIngredients.join(', ')
-    : 'None'}
-</p>
+                      <h3 className="mt-3 text-2xl font-semibold text-[#1f5c4d]">
+                        {meal.name}
+                      </h3>
 
-            <p className="mt-2 text-lg text-[#8ba095]">
-  Score: {meal.score}
-</p>
+                      <div className="mt-4">
+                        <span
+                          className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${
+                            meal.usesLeftover
+                              ? 'bg-[#e3f0e7] text-[#1f5c4d]'
+                              : 'bg-[#f3f6f4] text-[#6f857b]'
+                          }`}
+                        >
+                          {meal.usesLeftover ? 'Leftover-friendly' : 'Fresh meal'}
+                        </span>
+                      </div>
 
-            </div>
-      ))}
-     </div>
-  )}
-</section>
+                      <div className="mt-5 space-y-2 text-lg text-[#6f857b]">
+                        <p>
+                          <span className="font-medium text-[#1f5c4d]">
+                            Main ingredient:
+                          </span>{' '}
+                          {meal.mainIngredient}
+                        </p>
+                      </div>
+
+                      <div className="mt-5 rounded-2xl bg-[#f6f9f7] p-4">
+                        <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[#8ba095]">
+                          Missing ingredients
+                        </p>
+                        <p
+                          className={`mt-2 text-lg ${
+                            meal.missingIngredients.length > 0
+                              ? 'text-[#a35f4b]'
+                              : 'text-[#2b6a58]'
+                          }`}
+                        >
+                          {meal.missingIngredients.length > 0
+                            ? meal.missingIngredients.join(', ')
+                            : 'None'}
+                        </p>
+                      </div>
+
+                      <p className="mt-4 text-sm text-[#8ba095]">
+                        Score: {meal.score}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </section>
 
           </div>
         </main>
