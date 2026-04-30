@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AddIngredient from '../components/AddIngredient.jsx'
+import ShoppingList from '../components/ShoppingList.jsx'
 import { meals } from '../data/meals.js'
 
 function Home() {
@@ -116,11 +117,10 @@ function Home() {
             <section className="grid gap-6 lg:grid-cols-2">
               <article
                 onClick={() => setPlanningMode('smart')}
-                className={`rounded-3xl p-8 shadow-sm cursor-pointer ${
-                  planningMode === 'smart'
-                    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
-                    : 'bg-white'
-                }`}
+                className={`rounded-3xl p-8 shadow-sm cursor-pointer ${planningMode === 'smart'
+                  ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
+                  : 'bg-white'
+                  }`}
               >
                 <h2 className="text-3xl font-semibold text-[#1f5c4d]">
                   Smart Mode
@@ -141,11 +141,10 @@ function Home() {
 
               <article
                 onClick={() => setPlanningMode('fresh')}
-                className={`rounded-3xl p-8 shadow-sm cursor-pointer ${
-                  planningMode === 'fresh'
-                    ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
-                    : 'bg-white'
-                }`}
+                className={`rounded-3xl p-8 shadow-sm cursor-pointer ${planningMode === 'fresh'
+                  ? 'border-2 border-[#2b6a58] bg-[#e3f0e7]'
+                  : 'bg-white'
+                  }`}
               >
                 <h2 className="text-3xl font-semibold text-[#1f5c4d]">
                   Fresh Mode
@@ -261,11 +260,10 @@ function Home() {
 
                       <div className="mt-4">
                         <span
-                          className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${
-                            meal.usesLeftover
-                              ? 'bg-[#e3f0e7] text-[#1f5c4d]'
-                              : 'bg-[#f3f6f4] text-[#6f857b]'
-                          }`}
+                          className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${meal.usesLeftover
+                            ? 'bg-[#e3f0e7] text-[#1f5c4d]'
+                            : 'bg-[#f3f6f4] text-[#6f857b]'
+                            }`}
                         >
                           {meal.usesLeftover ? 'Leftover-friendly' : 'Fresh meal'}
                         </span>
@@ -285,11 +283,10 @@ function Home() {
                           Missing ingredients
                         </p>
                         <p
-                          className={`mt-2 text-lg ${
-                            meal.missingIngredients.length > 0
-                              ? 'text-[#a35f4b]'
-                              : 'text-[#2b6a58]'
-                          }`}
+                          className={`mt-2 text-lg ${meal.missingIngredients.length > 0
+                            ? 'text-[#a35f4b]'
+                            : 'text-[#2b6a58]'
+                            }`}
                         >
                           {meal.missingIngredients.length > 0
                             ? meal.missingIngredients.join(', ')
@@ -305,7 +302,24 @@ function Home() {
                 </div>
               )}
             </section>
-
+                        <section className="mt-16">
+              <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+                Your shopping list
+              </h2>
+              <p className="mt-3 text-xl text-[#8ba095]">
+                What you need to buy for your 7-day plan
+              </p>
+              {mealPlan.length === 0 ? (
+                <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
+                  <p className="text-lg text-[#8ba095]">
+                    No meal plan generated yet. Generate a plan to get an updated shoppinglist.
+                  </p>
+                </div>
+              ) : (
+                <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
+                  <ShoppingList mealPlan={mealPlan} />
+                </div>)}
+            </section>
           </div>
         </main>
 
