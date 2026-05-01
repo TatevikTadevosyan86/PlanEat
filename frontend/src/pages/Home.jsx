@@ -302,7 +302,7 @@ function Home() {
                 </div>
               )}
             </section>
-                        <section className="mt-16">
+            <section className="mt-16">
               <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
                 Your shopping list
               </h2>
@@ -312,13 +312,15 @@ function Home() {
               {mealPlan.length === 0 ? (
                 <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
                   <p className="text-lg text-[#8ba095]">
-                    No meal plan generated yet. Generate a plan to get an updated shoppinglist.
+                    No meal plan generated yet. Generate a plan to create your
+                    shopping list.
                   </p>
                 </div>
               ) : (
                 <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
                   <ShoppingList mealPlan={mealPlan} />
-                </div>)}
+                </div>
+              )}
             </section>
           </div>
         </main>
