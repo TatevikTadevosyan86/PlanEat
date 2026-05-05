@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+const ingredientRoutes = require('./routes/ingredients');
 
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.get('/api/health', (_req, res) => {
       mongoose.connection.readyState === 1 ? 'connected' : 'not_connected',
   });
 });
+
+app.use('/api/ingredients', ingredientRoutes);
 
 // Optional: Detailed database status endpoint
 app.get('/api/db-status', (_req, res) => {
