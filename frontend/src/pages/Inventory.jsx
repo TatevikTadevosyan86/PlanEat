@@ -19,7 +19,9 @@ function Inventory() {
         setIsLoadingIngredients(true)
         setIngredientError('')
 
-        // TODO: load ingredients from backend
+        const savedIngredients = await getIngredients()
+setIngredients(savedIngredients)
+
       } catch {
         setIngredientError('Could not load ingredients from the server.')
       } finally {
