@@ -33,7 +33,7 @@ function Home() {
         setIngredientError('')
         const savedIngredients = await getIngredients()
         setIngredients(savedIngredients)
-      } catch (error) {
+      } catch {
         setIngredientError('Could not load ingredients from the server.')
       } finally {
         setIsLoadingIngredients(false)
@@ -66,9 +66,9 @@ function Home() {
       setIngredientType('fresh')
     } catch (error) {
       setIngredientError(
-  error.response?.data?.message || 'This ingredient already exists in the selected type.'
-)
-
+        error.response?.data?.message ||
+          'This ingredient already exists in the selected type.'
+      )
     }
   }
 
@@ -79,7 +79,7 @@ function Home() {
       setIngredients((currentIngredients) =>
         currentIngredients.filter((ingredient) => ingredient.id !== id)
       )
-    } catch (error) {
+    } catch {
       setIngredientError('Could not remove ingredient. Please try again.')
     }
   }
