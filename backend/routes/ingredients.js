@@ -18,6 +18,7 @@ router.post('/', async (req, res, next) => {
     const trimmedName = name?.trim();
     const existingIngredient = await Ingredient.findOne({
   name: new RegExp(`^${trimmedName}$`, 'i'),
+  type,
 });
 if (existingIngredient) {
   return res.status(409).json({
