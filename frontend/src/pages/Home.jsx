@@ -66,7 +66,7 @@ function Home() {
       setIngredientType('fresh')
     } catch (error) {
       setIngredientError(
-  error.response?.data?.message || 'Could not save ingredient. Please try again.'
+  error.response?.data?.message || 'This ingredient already exists in the selected type.'
 )
 
     }
