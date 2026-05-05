@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import AddIngredient from '../components/AddIngredient.jsx'
 import {
@@ -153,6 +154,15 @@ setIngredients((currentIngredients) =>
             </div>
           </article>
         </section>
+        <div className="mt-10">
+  <Link
+    to="/meal-plan"
+    className="inline-block rounded-2xl bg-[#1f5c4d] px-8 py-4 text-lg font-semibold text-white"
+  >
+    Continue to Meal Plan
+  </Link>
+</div>
+
       </div>
     </div>
   )
