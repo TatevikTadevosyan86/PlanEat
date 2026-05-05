@@ -16,6 +16,15 @@ router.post('/', async (req, res, next) => {
   try {
     const { name, type = 'fresh' } = req.body;
     const trimmedName = name?.trim();
+    const existingIngredient = await Ingredient.findOne({
+  name: new RegExp(`^${trimmedName}$`, 'i'),
+});
+if (existingIngredient) {
+  return res.status(409).json({
+    message: 'Ingredient already exists.',
+  });
+}
+
 
     if (!trimmedName) {
       return res.status(400).json({
