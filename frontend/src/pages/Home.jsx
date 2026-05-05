@@ -65,7 +65,10 @@ function Home() {
       setIngredientName('')
       setIngredientType('fresh')
     } catch (error) {
-      setIngredientError('Could not save ingredient. Please try again.')
+      setIngredientError(
+  error.response?.data?.message || 'Could not save ingredient. Please try again.'
+)
+
     }
   }
 
