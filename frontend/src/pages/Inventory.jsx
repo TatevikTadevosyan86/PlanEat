@@ -43,7 +43,16 @@ setIngredients(savedIngredients)
     try {
       setIngredientError('')
 
-      // TODO: save ingredient through backend
+      const savedIngredient = await createIngredient({
+  name: trimmedName,
+  type: ingredientType,
+})
+
+setIngredients((currentIngredients) => [
+  savedIngredient,
+  ...currentIngredients,
+])
+
 
       setIngredientName('')
       setIngredientType('fresh')
