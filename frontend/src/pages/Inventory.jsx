@@ -68,7 +68,11 @@ setIngredients((currentIngredients) => [
     try {
       setIngredientError('')
 
-      // TODO: delete ingredient through backend
+      await deleteIngredient(id)
+setIngredients((currentIngredients) =>
+  currentIngredients.filter((ingredient) => ingredient.id !== id)
+)
+
     } catch {
       setIngredientError('Could not remove ingredient. Please try again.')
     }
