@@ -22,7 +22,7 @@ router.post('/', async (req, res, next) => {
 });
 if (existingIngredient) {
   return res.status(409).json({
-    message: 'Ingredient already exists.',
+    message: 'This ingredient already exists in the selected type.',
   });
 }
 
