@@ -1,9 +1,6 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-function Home() {
-  const [planningMode, setPlanningMode] = useState('smart')
-
+function Home({ planningMode, setPlanningMode }) {
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
