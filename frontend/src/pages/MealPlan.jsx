@@ -120,6 +120,8 @@ await createMealPlan({
               >
                 Meal Plan
               </Link>
+              <Link to="/shopping-list">Shopping List</Link>
+
             </nav>
           </div>
         </header>
