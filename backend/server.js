@@ -1,4 +1,4 @@
-
+const mealPlanRoutes = require('./routes/mealPlans');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -33,6 +33,8 @@ app.get('/api/health', (_req, res) => {
 });
 
 app.use('/api/ingredients', ingredientRoutes);
+app.use('/api/meal-plans', mealPlanRoutes);
+
 
 // Optional: Detailed database status endpoint
 app.get('/api/db-status', (_req, res) => {
