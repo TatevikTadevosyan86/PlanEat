@@ -314,12 +314,7 @@ await createMealPlan({
               </div>
             </section>
             <div className="mt-8">
-  <Link
-    to="/shopping-list"
-    className="inline-block rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white"
-  >
-    View Shopping List Page
-  </Link>
+ 
 </div>
 
           </div>
