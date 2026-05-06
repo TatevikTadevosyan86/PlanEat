@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import Inventory from './pages/Inventory.jsx'
 import MealPlan from './pages/MealPlan.jsx'
+import ShoppingListPage from './pages/ShoppingListPage.jsx'
+
 
 function App() {
   const [planningMode, setPlanningMode] = useState('smart')
