@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import ShoppingList from '../components/ShoppingList.jsx'
 import { meals } from '../data/meals.js'
 import { getIngredients } from '../services/ingredients.js'
 import { createMealPlan } from '../services/mealPlans.js'
@@ -298,23 +297,21 @@ await createMealPlan({
 
             <section className="mt-16">
               <h2 className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
-                Your shopping list
+                Shopping List
               </h2>
               <p className="mt-3 text-xl text-[#8ba095]">
-                What you need to buy for your 7-day plan
+                View the missing ingredients from your latest saved meal plan on
+                the shopping list page.
               </p>
-              {mealPlan.length === 0 ? (
-                <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
-                  <p className="text-lg text-[#8ba095]">
-                    No meal plan generated yet. Generate a plan to create your
-                    shopping list.
-                  </p>
-                </div>
-              ) : (
-                <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
-                  <ShoppingList mealPlan={mealPlan} />
-                </div>
-              )}
+
+              <div className="mt-8">
+                <Link
+                  to="/shopping-list"
+                  className="inline-block rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white"
+                >
+                  Go to Shopping List
+                </Link>
+              </div>
             </section>
             <div className="mt-8">
   <Link
