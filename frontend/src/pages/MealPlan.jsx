@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import ShoppingList from '../components/ShoppingList.jsx'
 import { meals } from '../data/meals.js'
 import { getIngredients } from '../services/ingredients.js'
+import { createMealPlan } from '../services/mealPlans.js'
+
 
 function MealPlan({ planningMode }) {
   const [ingredients, setIngredients] = useState([])
@@ -36,7 +38,7 @@ function MealPlan({ planningMode }) {
     loadIngredients()
   }, [])
 
-  function handleGenerateMealPlan() {
+  async function handleGenerateMealPlan() {
     if (ingredients.length === 0) {
       setMealPlan([])
       setMealPlanError('Add ingredients in your inventory before generating a meal plan.')
@@ -81,6 +83,18 @@ function MealPlan({ planningMode }) {
     const selectedMeals = scoredMeals
       .sort((a, b) => b.score - a.score)
       .slice(0, 7)
+const mealsWithDays = selectedMeals.map((meal, index) => ({
+  day: weekdays[index],
+  name: meal.name,
+  mainIngredient: meal.mainIngredient,
+  usesLeftover: meal.usesLeftover,
+  missingIngredients: meal.missingIngredients,
+  score: meal.score,
+}))
+await createMealPlan({
+  planningMode,
+  meals: mealsWithDays,
+})
 
     setMealPlan(selectedMeals)
   }
