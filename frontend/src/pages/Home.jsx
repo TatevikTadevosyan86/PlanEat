@@ -22,6 +22,8 @@ function Home({ planningMode, setPlanningMode }) {
               </Link>
               <Link to="/inventory">Inventory</Link>
               <Link to="/meal-plan">Meal Plan</Link>
+              <Link to="/shopping-list">Shopping List</Link>
+
             </nav>
           </div>
         </header>
