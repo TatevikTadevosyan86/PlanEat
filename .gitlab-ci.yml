@@ -3,6 +3,7 @@ image: node:24
 stages:
   - test
   - build
+  - deploy 
 
 default:
   cache:
@@ -38,3 +39,17 @@ frontend_build:
     paths:
       - frontend/dist/
     expire_in: 1 week
+
+
+pages:
+  stage: deploy
+  script:
+   
+    - mkdir -p public
+    
+    - cp -r frontend/dist/* public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - main  
