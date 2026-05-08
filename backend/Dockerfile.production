@@ -1,0 +1,24 @@
+FROM node:20-slim
+
+WORKDIR /usr/src/app
+
+# Copy package files
+COPY package*.json ./
+
+# Install ONLY production dependencies (no nodemon, no dev tools)
+RUN npm ci --omit=dev
+
+# Copy application code
+COPY . .
+
+# Run as non-root user for security
+USER node
+
+# Set production environment
+ENV NODE_ENV=production
+ENV PORT=5000
+
+EXPOSE 5000
+
+# Start directly with node (not nodemon)
+CMD ["node", "server.js"]
