@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.production
+    container_name: planeat-backend-prod
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    env_file:
+      - ./backend/.env
+    restart: always
+    volumes: []  # No volume mounts in production!
+
+  frontend:
+    build: ./frontend
+    container_name: planeat-frontend-prod
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: always
+    volumes: []  # No volume mounts in production!
