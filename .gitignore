@@ -5,3 +5,25 @@ backend/.env
 frontend/.env
 .DS_Store
 Thumbs.db
+# Docker volumes (database data)
+.volumes/
+
+# Docker environment files (if you create a root .env)
+.env
+.env.production
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE files (optional but good)
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
