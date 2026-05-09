@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiBaseUrl =
-  import.meta.env.VITE_API_URL ?? 'http://localhost:5000/api'
+  import.meta.env.VITE_API_URL || 'http://cu2110.camp.lnu.se:5000/api'
 
 function mapIngredient(ingredient) {
   return {
