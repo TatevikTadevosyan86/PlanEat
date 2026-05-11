@@ -11,6 +11,7 @@ function Inventory() {
   const [ingredientName, setIngredientName] = useState('')
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
+  const [ingredientState, setIngredientState] = useState('cooked') 
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(true)
   const [ingredientError, setIngredientError] = useState('')
 
