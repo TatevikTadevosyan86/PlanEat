@@ -1,6 +1,8 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.development
     volumes:
       - ./backend:/usr/src/app
       - /usr/src/app/node_modules
@@ -10,11 +12,14 @@ services:
       - "5000:5000"
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.development
     volumes:
       - ./frontend:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - VITE_API_PROXY_TARGET=http://backend:5000
     ports:
       - "5173:5173"

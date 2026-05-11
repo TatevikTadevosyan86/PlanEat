@@ -2,10 +2,10 @@
 
 services:
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.production
     container_name: planeat-backend
-    ports:
-      - "5000:5000"
     environment:
       - NODE_ENV=production
       - PORT=5000
@@ -14,7 +14,9 @@ services:
     restart: unless-stopped
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
     container_name: planeat-frontend
     ports:
       - "8080:80"
