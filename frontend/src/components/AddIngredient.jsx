@@ -47,6 +47,7 @@ function AddIngredient({
             </button>
           </div>
         </div>
+        {ingredientType === 'leftover' && (
 <div className="mt-6">
           <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">State</p>
           <select
@@ -64,6 +65,7 @@ function AddIngredient({
             <option value="cooked">Cooked</option>
           </select>
         </div>
+        )}
         <button
           type="submit"
           className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white"
