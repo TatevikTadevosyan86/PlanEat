@@ -3,6 +3,8 @@ function AddIngredient({
   setIngredientName,
   ingredientType,
   setIngredientType,
+  ingredientState,
+  setIngredientState,
   onAddIngredient,
 }) {
   return (
@@ -45,7 +47,23 @@ function AddIngredient({
             </button>
           </div>
         </div>
-
+<div className="mt-6">
+          <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">State</p>
+          <select
+            value={ingredientState}
+            onChange={(event) => setIngredientState(event.target.value)}
+            className="w-full rounded-2xl border border-[#d9e7dd] px-5 py-4 text-lg text-[#1f5c4d] outline-none"
+          >
+            
+            <option value="boiled">Boiled</option>
+            <option value="steamed">Steamed</option>
+            <option value="fried">Fried</option>
+            <option value="baked">Baked</option>
+            <option value="grilled">Grilled</option>
+            <option value="chopped">Chopped</option>
+            <option value="cooked">Cooked</option>
+          </select>
+        </div>
         <button
           type="submit"
           className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white"
