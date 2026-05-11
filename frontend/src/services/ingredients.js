@@ -7,6 +7,7 @@ function mapIngredient(ingredient) {
     id: ingredient._id,
     name: ingredient.name,
     type: ingredient.type,
+    state: ingredient.state,
   }
 }
 
