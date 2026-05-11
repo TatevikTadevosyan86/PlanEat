@@ -48,6 +48,7 @@ setIngredients(savedIngredients)
       const savedIngredient = await createIngredient({
   name: trimmedName,
   type: ingredientType,
+  state: ingredientState, 
 })
 
 setIngredients((currentIngredients) => [
@@ -123,6 +124,8 @@ setIngredients((currentIngredients) =>
                 setIngredientName={setIngredientName}
                 ingredientType={ingredientType}
                 setIngredientType={setIngredientType}
+                ingredientState={ingredientState}
+                setIngredientState={setIngredientState}
                 onAddIngredient={handleAddIngredient}
               />
 
@@ -162,7 +165,7 @@ setIngredients((currentIngredients) =>
                               {ingredient.name}
                             </p>
                             <p className="mt-1 text-lg capitalize text-[#8ba095]">
-                              {ingredient.type}
+                              {ingredient.type}• {ingredient.state || 'cooked'}
                             </p>
                           </div>
 
