@@ -13,7 +13,12 @@ const ingredientSchema = new mongoose.Schema(
       default: 'fresh',
       required: true,
     },
+    state: {
+      type: String,
+      enum: ['boiled', 'steamed', 'fried', 'baked', 'grilled', 'chopped', 'cooked'],
+      default: 'cooked',
   },
+},
   {
     timestamps: true,
   }
