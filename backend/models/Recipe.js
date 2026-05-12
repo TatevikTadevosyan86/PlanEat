@@ -13,7 +13,9 @@ const recipeSchema = new mongoose.Schema(
     instructions: [{ type: String }], // Array of instruction steps
     mainIngredient: { type: String, required: true },
     usesLeftover: { type: Boolean, default: false },
+    cuisine: { type: String },
     prepTime: { type: Number, default: 30 },
+    
   },
   { timestamps: true }
 );
