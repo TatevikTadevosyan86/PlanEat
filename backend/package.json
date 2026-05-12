@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
+    "seed": "node scripts/seedRecipes.js",
     "test": "node --test"
   },
   "keywords": [],
@@ -23,4 +24,5 @@
   "devDependencies": {
     "nodemon": "^3.1.14"
   }
+  
 }
