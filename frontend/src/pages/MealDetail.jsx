@@ -51,31 +51,34 @@ function MealDetail() {
 
   return (
     <div className="min-h-screen bg-[#f6f8f7]">
-      {/* Hero Section with Background Image */}
-      <div
-        className="relative h-[320px] overflow-hidden"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url(${meal.image || 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200'})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="mx-auto flex h-full max-w-7xl flex-col justify-end px-6 pb-10">
-          <Link
-            to="/meal-plan"
-            className="mb-5 w-fit rounded-full bg-white/20 px-4 py-2 text-sm text-white backdrop-blur hover:bg-white/30"
-          >
-            ← Back to Meal Plan
-          </Link>
+      {/* Hero Section - Image only (no text overlay) */}
+      <div className="relative h-[320px] overflow-hidden bg-[#f6f8f7]">
+        <div 
+          className="absolute inset-0 bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url(${meal.image || 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200'})`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center'
+          }}
+        />
+      </div>
 
-          <h1 className="text-5xl font-bold text-white md:text-6xl">
-            {meal.name}
-          </h1>
+      {/* Title and Description - Below the image */}
+      <div className="mx-auto max-w-7xl px-6 pt-6 pb-4">
+        <Link
+          to="/meal-plan"
+          className="mb-4 inline-block rounded-full bg-[#eef9f2] px-4 py-2 text-sm text-[#1f5c4d] hover:bg-[#dcebe0]"
+        >
+          ← Back to Meal Plan
+        </Link>
 
-          <p className="mt-3 max-w-2xl text-lg text-white/90">
-            {meal.description || 'A delicious homemade meal recipe'}
-          </p>
-        </div>
+        <h1 className="text-5xl font-bold text-[#173f35] md:text-6xl">
+          {meal.name}
+        </h1>
+
+        <p className="mt-3 max-w-2xl text-lg text-gray-600">
+          {meal.description || 'A delicious homemade meal recipe'}
+        </p>
       </div>
 
       {/* Main Layout */}

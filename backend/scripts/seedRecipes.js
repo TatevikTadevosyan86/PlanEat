@@ -23,7 +23,7 @@ const meals = [
     mainIngredient: 'chicken',
     usesLeftover: false,
     cuisine: 'asian',
-    image:'/images/chicken_rice_bowl.jpg',
+    image:'/images/recipes/Chicken_Rice_Bowl.png',
     prepTime: 25,
   },
   {
@@ -44,7 +44,7 @@ const meals = [
     mainIngredient: 'chicken',
     usesLeftover: false,
     cuisine: 'italian',
-    image:'/images/chicken_pasta.jpg',
+    image:'/images/recipes/Chicken_Pasta.png',
     prepTime: 30,
   },
   {
@@ -67,7 +67,7 @@ const meals = [
     mainIngredient: 'chicken',
     usesLeftover: true,
     cuisine: 'comfort',
-    image:'/images/chicken_soup.jpg',
+    image:'/images/recipes/chicken_soup.png',
     prepTime: 20,
   },
   {
@@ -89,7 +89,7 @@ const meals = [
     mainIngredient: 'chicken',
     usesLeftover: true,
     cuisine: 'mexican',
-    image:'/images/chicken_tacos.jpg',  
+    image:'/images/recipes/chicken_tacos.png',  
     prepTime: 15,
   },
   {
@@ -112,6 +112,7 @@ const meals = [
     mainIngredient: 'ground beef',
     usesLeftover: false,
     cuisine: 'italian',
+    image: '/images/recipes/spaghetti_bolognese.png',
     prepTime: 35,
   },
   {
@@ -134,7 +135,7 @@ const meals = [
     mainIngredient: 'ground beef',
     usesLeftover: false,
     cuisine: 'mexican',
-    image:'/images/tacos.jpg',          
+    image:'/images/recipes/tacos.png',          
     prepTime: 20,
   },
   {
@@ -155,7 +156,7 @@ const meals = [
     mainIngredient: 'ground beef',
     usesLeftover: true,
     cuisine: 'italian',
-    image: '/images/meatball_pasta.jpg',
+    image: '/images/recipes/meatball_pasta.png',
     prepTime: 15,
   },
   {
@@ -178,7 +179,7 @@ const meals = [
     mainIngredient: 'ground beef',
     usesLeftover: false,
     cuisine: 'british',
-    image: '/images/shepherds_pie.jpg',
+    image: '/images/recipes/shepherds_pie.png',
     prepTime: 45,
   },
   {
@@ -200,7 +201,7 @@ const meals = [
     mainIngredient: 'eggs',
     usesLeftover: false,
     cuisine: 'breakfast',
-    image: '/images/omelette.jpg',
+    image: '/images/recipes/omelette.png',
     prepTime: 10,
   },
   {
@@ -222,7 +223,7 @@ const meals = [
     mainIngredient: 'eggs',
     usesLeftover: true,
     cuisine: 'asian',
-    image: '/images/fried_rice.jpg',
+    image: '/images/recipes/fried_rice.png',
     prepTime: 15,
   },
   {
@@ -244,7 +245,7 @@ const meals = [
     mainIngredient: 'tomato',
     usesLeftover: false,
     cuisine: 'italian',
-    image: '/images/tomato_pasta.jpg',
+    image: '/images/recipes/tomato_pasta.png',
     prepTime: 20,
   },
   {
@@ -267,7 +268,7 @@ const meals = [
     mainIngredient: 'vegetables',
     usesLeftover: true,
     cuisine: 'soup',
-    image: '/images/vegetable_soup.jpg',
+    image: '/images/recipes/vegetable_soup.png',
     prepTime: 25,
   }
 ];
