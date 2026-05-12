@@ -7,36 +7,30 @@ import { createMealPlan } from '../services/mealPlans.js'
 
 function MealPlan({ planningMode }) {
   const [ingredients, setIngredients] = useState([])
+  const [recipes, setRecipes] = useState([])  // ← NEW
   const [mealPlan, setMealPlan] = useState([])
-  const [recipes, setRecipes] = useState([]);
-const [isLoadingRecipes, setIsLoadingRecipes] = useState(true);
-  const [isLoadingIngredients, setIsLoadingIngredients] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [mealPlanError, setMealPlanError] = useState('')
-  const weekdays = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ]
+  const weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
   useEffect(() => {
-    async function loadIngredients() {
+    async function loadData() {
       try {
-        setIsLoadingIngredients(true)
+        setIsLoading(true)
         setMealPlanError('')
-        const savedIngredients = await getIngredients()
+        const [savedIngredients, savedRecipes] = await Promise.all([
+          getIngredients(),
+          getRecipes()
+        ])
         setIngredients(savedIngredients)
+        setRecipes(savedRecipes)
       } catch {
-        setMealPlanError('Could not load ingredients from the server.')
+        setMealPlanError('Could not load data from the server.')
       } finally {
-        setIsLoadingIngredients(false)
+        setIsLoading(false)
       }
     }
-
-    loadIngredients()
+    loadData()
   }, [])
 
   async function handleGenerateMealPlan() {
@@ -46,59 +40,30 @@ const [isLoadingRecipes, setIsLoadingRecipes] = useState(true);
       return
     }
 
-    setMealPlanError('')
+    const availableIngredientNames = ingredients.map(i => i.name.toLowerCase())
 
-    const availableIngredientNames = ingredients.map((ingredient) =>
-      ingredient.name.toLowerCase()
-    )
-
-    const scoredMeals = meals.map((meal) => {
+    const scoredMeals = recipes.map((meal) => {
       let score = meal.ingredients.reduce((total, ingredient) => {
-        if (availableIngredientNames.includes(ingredient.toLowerCase())) {
+        if (availableIngredientNames.includes(ingredient.name.toLowerCase())) {
           return total + 2
         }
-
         return total - 1
       }, 0)
 
-      if (planningMode === 'smart' && meal.usesLeftover) {
-        score += 3
-      }
+      if (planningMode === 'smart' && meal.usesLeftover) score += 3
+      if (planningMode === 'fresh' && meal.usesLeftover) score -= 2
 
-      if (planningMode === 'fresh' && meal.usesLeftover) {
-        score -= 2
-      }
+      const missingIngredients = meal.ingredients
+        .filter(ing => !availableIngredientNames.includes(ing.name.toLowerCase()))
+        .map(ing => `${ing.name} ${ing.quantity}${ing.unit}`)
 
-      const missingIngredients = meal.ingredients.filter(
-        (ingredient) =>
-          !availableIngredientNames.includes(ingredient.toLowerCase())
-      )
-
-      return {
-        ...meal,
-        score,
-        missingIngredients,
-      }
+      return { ...meal, score, missingIngredients }
     })
 
-    const selectedMeals = scoredMeals
-      .sort((a, b) => b.score - a.score)
-      .slice(0, 7)
-const mealsWithDays = selectedMeals.map((meal, index) => ({
-  day: weekdays[index],
-  name: meal.name,
-  mainIngredient: meal.mainIngredient,
-  usesLeftover: meal.usesLeftover,
-  missingIngredients: meal.missingIngredients,
-  score: meal.score,
-}))
-await createMealPlan({
-  planningMode,
-  meals: mealsWithDays,
-})
-
+    const selectedMeals = scoredMeals.sort((a, b) => b.score - a.score).slice(0, 7)
     setMealPlan(selectedMeals)
   }
+
 
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
@@ -165,10 +130,10 @@ await createMealPlan({
                   <button
                     type="button"
                     onClick={handleGenerateMealPlan}
-                    disabled={isLoadingIngredients}
+                    disabled={isLoading}
                     className="w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white disabled:cursor-not-allowed disabled:bg-[#9db3a8]"
                   >
-                    {isLoadingIngredients
+                    {isLoading
                       ? 'Loading inventory...'
                       : 'Generate Meal Plan'}
                   </button>
@@ -188,7 +153,7 @@ await createMealPlan({
                 </h2>
 
                 <div className="mt-5 space-y-4">
-                  {isLoadingIngredients ? (
+                  {isLoading ? (
                     <div className="rounded-2xl bg-[#f6f9f7] p-4">
                       <p className="text-lg text-[#8ba095]">
                         Loading saved ingredients...
