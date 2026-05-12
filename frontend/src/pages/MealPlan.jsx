@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getRecipes } from '../services/recipes.js'
 import { getIngredients } from '../services/ingredients.js'
-import { createMealPlan } from '../services/mealPlans.js'
+
 
 
 function MealPlan({ planningMode }) {
