@@ -267,6 +267,12 @@ await createMealPlan({
                           </span>{' '}
                           {meal.mainIngredient}
                         </p>
+                        <Link
+  to={`/meal-plan/${meal.id}`}
+  className="mt-4 inline-block rounded-2xl bg-[#1f5c4d] px-6 py-2 text-white"
+>
+  View Instructions →
+</Link>
                       </div>
 
                       <div className="mt-5 rounded-2xl bg-[#f6f9f7] p-4">
