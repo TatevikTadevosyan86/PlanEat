@@ -15,6 +15,7 @@ const recipeSchema = new mongoose.Schema(
     usesLeftover: { type: Boolean, default: false },
     cuisine: { type: String },
     prepTime: { type: Number, default: 30 },
+    image: { type: String, default: '' } 
     
   },
   { timestamps: true }
