@@ -235,7 +235,7 @@ await createMealPlan({
                 <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                   {mealPlan.map((meal, index) => (
                     <div
-                      key={meal.id}
+                      key={meal._id}
                       className="rounded-3xl border border-[#dbe7de] bg-white p-6 shadow-sm"
                     >
                       <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#8ba095]">
@@ -268,7 +268,7 @@ await createMealPlan({
                           {meal.mainIngredient}
                         </p>
                         <Link
-  to={`/meal-plan/${meal.id}`}
+  to={`/meal-plan/${meal._id}`}
   className="mt-4 inline-block rounded-2xl bg-[#1f5c4d] px-6 py-2 text-white"
 >
   View Instructions →
