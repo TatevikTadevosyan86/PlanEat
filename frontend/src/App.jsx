@@ -4,6 +4,7 @@ import Home from './pages/Home.jsx'
 import Inventory from './pages/Inventory.jsx'
 import MealPlan from './pages/MealPlan.jsx'
 import ShoppingListPage from './pages/ShoppingListPage.jsx'
+import MealDetail from './pages/MealDetail.jsx'
 
 
 function App() {

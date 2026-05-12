@@ -30,6 +30,7 @@ app.get('/api/health', (_req, res) => {
 
 app.use('/api/ingredients', ingredientRoutes);
 app.use('/api/meal-plans', mealPlanRoutes);
+app.use('/api/recipes', recipeRoutes);
 
 
 // Optional: Detailed database status endpoint
