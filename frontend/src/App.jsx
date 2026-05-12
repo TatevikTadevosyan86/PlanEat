@@ -26,7 +26,9 @@ function App() {
           path="/meal-plan"
           element={<MealPlan planningMode={planningMode} />}
         />
+        <Route path="/meal-plan/:id" element={<MealDetail />} /> 
         <Route path="/shopping-list" element={<ShoppingListPage />} />
+        
 
       </Routes>
     </BrowserRouter>
