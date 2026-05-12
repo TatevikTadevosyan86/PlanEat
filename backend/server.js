@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const ingredientRoutes = require('./routes/ingredients');
+const recipeRoutes = require('./routes/recipes');
 
 dotenv.config();
 
