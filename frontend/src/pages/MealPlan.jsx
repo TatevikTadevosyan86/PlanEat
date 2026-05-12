@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { meals } from '../data/meals.js'
+import { getRecipes } from '../services/recipes.js'
 import { getIngredients } from '../services/ingredients.js'
 import { createMealPlan } from '../services/mealPlans.js'
 
@@ -8,6 +8,8 @@ import { createMealPlan } from '../services/mealPlans.js'
 function MealPlan({ planningMode }) {
   const [ingredients, setIngredients] = useState([])
   const [mealPlan, setMealPlan] = useState([])
+  const [recipes, setRecipes] = useState([]);
+const [isLoadingRecipes, setIsLoadingRecipes] = useState(true);
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(true)
   const [mealPlanError, setMealPlanError] = useState('')
   const weekdays = [
