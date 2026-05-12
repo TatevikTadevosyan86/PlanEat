@@ -63,10 +63,10 @@ app.use((err, _req, res, _next) => {
 });
 
 async function connectToDatabase() {
-  const mongoUri = process.env.MONGO_URI;
+  const mongoUri = process.env.DB_CONNECTION_STRING;
 
   if (!mongoUri) {
-    console.warn('MONGO_URI is not set. Starting server without MongoDB.');
+    console.warn('DB_CONNECTION_STRING is not set. Starting server without MongoDB.');
     return;
   }
 

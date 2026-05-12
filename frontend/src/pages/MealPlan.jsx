@@ -34,35 +34,49 @@ function MealPlan({ planningMode }) {
   }, [])
 
   async function handleGenerateMealPlan() {
-    if (ingredients.length === 0) {
-      setMealPlan([])
-      setMealPlanError('Add ingredients in your inventory before generating a meal plan.')
-      return
-    }
+  console.log('=== Generate Meal Plan Debug ===');
+  console.log('Ingredients count:', ingredients.length);
+  console.log('Recipes count:', recipes.length);
+  console.log('Planning mode:', planningMode);
 
-    const availableIngredientNames = ingredients.map(i => i.name.toLowerCase())
-
-    const scoredMeals = recipes.map((meal) => {
-      let score = meal.ingredients.reduce((total, ingredient) => {
-        if (availableIngredientNames.includes(ingredient.name.toLowerCase())) {
-          return total + 2
-        }
-        return total - 1
-      }, 0)
-
-      if (planningMode === 'smart' && meal.usesLeftover) score += 3
-      if (planningMode === 'fresh' && meal.usesLeftover) score -= 2
-
-      const missingIngredients = meal.ingredients
-        .filter(ing => !availableIngredientNames.includes(ing.name.toLowerCase()))
-        .map(ing => `${ing.name} ${ing.quantity}${ing.unit}`)
-
-      return { ...meal, score, missingIngredients }
-    })
-
-    const selectedMeals = scoredMeals.sort((a, b) => b.score - a.score).slice(0, 7)
-    setMealPlan(selectedMeals)
+  if (ingredients.length === 0) {
+    console.log('No ingredients, showing error');
+    setMealPlan([]);
+    setMealPlanError('Add ingredients in your inventory before generating a meal plan.');
+    return;
   }
+
+  const availableIngredientNames = ingredients.map(i => i.name.toLowerCase());
+  console.log('Available ingredients:', availableIngredientNames);
+
+  const scoredMeals = recipes.map((meal) => {
+    let score = meal.ingredients.reduce((total, ingredient) => {
+      if (availableIngredientNames.includes(ingredient.name.toLowerCase())) {
+        return total + 2;
+      }
+      return total - 1;
+    }, 0);
+
+    if (planningMode === 'smart' && meal.usesLeftover) score += 3;
+    if (planningMode === 'fresh' && meal.usesLeftover) score -= 2;
+
+    const missingIngredients = meal.ingredients
+      .filter(ing => !availableIngredientNames.includes(ing.name.toLowerCase()))
+      .map(ing => `${ing.name} ${ing.quantity}${ing.unit}`);
+
+    return { ...meal, score, missingIngredients };
+  });
+
+  console.log('Scored meals count:', scoredMeals.length);
+  console.log('First scored meal:', scoredMeals[0]);
+
+  const selectedMeals = scoredMeals.sort((a, b) => b.score - a.score).slice(0, 7);
+  console.log('Selected meals count:', selectedMeals.length);
+  console.log('Selected meals:', selectedMeals);
+
+  setMealPlan(selectedMeals);
+  console.log('mealPlan state updated');
+}
 
 
   return (
@@ -234,14 +248,14 @@ function MealPlan({ planningMode }) {
                           </span>{' '}
                           {meal.mainIngredient}
                         </p>
-                        <Link
+                        
+                      </div>
+<Link
   to={`/meal-plan/${meal._id}`}
   className="mt-4 inline-block rounded-2xl bg-[#1f5c4d] px-6 py-2 text-white"
 >
   View Instructions →
 </Link>
-                      </div>
-
                       <div className="mt-5 rounded-2xl bg-[#f6f9f7] p-4">
                         <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[#8ba095]">
                           Missing ingredients
