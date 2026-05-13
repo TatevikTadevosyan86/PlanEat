@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getRecipes } from '../services/recipes.js'
 import { getIngredients } from '../services/ingredients.js'
+import { createMealPlan } from '../services/mealPlans.js'
 
 
 
@@ -32,6 +33,34 @@ function MealPlan({ planningMode }) {
     }
     loadData()
   }, [])
+  // Load saved meal plan from backend on page load
+useEffect(() => {
+  async function loadSavedMealPlan() {
+    try {
+      const savedPlan = await getLatestMealPlan()
+      if (savedPlan && savedPlan.meals && savedPlan.meals.length > 0) {
+        // Convert saved plan back to the format your component expects
+        const loadedMeals = savedPlan.meals.map(meal => ({
+          _id: meal._id,
+          name: meal.name,
+          mainIngredient: meal.mainIngredient,
+          usesLeftover: meal.usesLeftover,
+          missingIngredients: meal.missingIngredients,
+          score: meal.score,
+        }))
+        setMealPlan(loadedMeals)
+        console.log('✅ Loaded saved meal plan from backend')
+      }
+    } catch (error) {
+      // 404 is fine – means no saved plan yet
+      if (error.response?.status !== 404) {
+        console.error('Failed to load saved meal plan:', error)
+      }
+    }
+  }
+  
+  loadSavedMealPlan()
+}, []) // Empty array = runs once when page loads
 
   async function handleGenerateMealPlan() {
   console.log('=== Generate Meal Plan Debug ===');
