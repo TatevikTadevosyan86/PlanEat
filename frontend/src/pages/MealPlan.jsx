@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getRecipes } from '../services/recipes.js'
 import { getIngredients } from '../services/ingredients.js'
-import { createMealPlan } from '../services/mealPlans.js'
+import { createMealPlan, getLatestMealPlan } from '../services/mealPlans.js'
 
 
 
@@ -123,7 +123,7 @@ useEffect(() => {
   } catch (error) {
     console.error('Failed to save meal plan:', error);
   }
-}
+
 }
 
 
