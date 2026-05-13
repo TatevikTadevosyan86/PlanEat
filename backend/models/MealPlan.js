@@ -7,6 +7,10 @@ const mealSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+     recipeId: { 
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
     name: {
       type: String,
       required: true,
@@ -30,7 +34,9 @@ const mealSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { _id: false }
+  
+  { _id: true } 
+
 );
 
 const mealPlanSchema = new mongoose.Schema(

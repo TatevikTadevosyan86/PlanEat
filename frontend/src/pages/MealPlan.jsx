@@ -41,7 +41,7 @@ useEffect(() => {
       if (savedPlan && savedPlan.meals && savedPlan.meals.length > 0) {
         // Convert saved plan back to the format your component expects
         const loadedMeals = savedPlan.meals.map(meal => ({
-          _id: meal._id,
+           _id: meal.recipeId,
           name: meal.name,
           mainIngredient: meal.mainIngredient,
           usesLeftover: meal.usesLeftover,
@@ -107,6 +107,7 @@ useEffect(() => {
   console.log('mealPlan state updated');
   const mealsWithDays = selectedMeals.map((meal, index) => ({
     day: weekdays[index],
+    recipeId: meal._id,
     name: meal.name,
     mainIngredient: meal.mainIngredient,
     usesLeftover: meal.usesLeftover,
