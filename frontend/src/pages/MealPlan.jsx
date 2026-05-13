@@ -76,6 +76,25 @@ function MealPlan({ planningMode }) {
 
   setMealPlan(selectedMeals);
   console.log('mealPlan state updated');
+  const mealsWithDays = selectedMeals.map((meal, index) => ({
+    day: weekdays[index],
+    name: meal.name,
+    mainIngredient: meal.mainIngredient,
+    usesLeftover: meal.usesLeftover,
+    missingIngredients: meal.missingIngredients,
+    score: meal.score,
+  }));
+
+  try {
+    await createMealPlan({
+      planningMode,
+      meals: mealsWithDays,
+    });
+    console.log('✅ Meal plan saved to backend');
+  } catch (error) {
+    console.error('Failed to save meal plan:', error);
+  }
+}
 }
 
 
