@@ -54,6 +54,10 @@ deploy_production:
     - chmod 644 ~/.ssh/known_hosts
   script:
     - >
+    - echo "USER=[$PRODUCTION_USER]"
+    - echo "HOST=[$PRODUCTION_HOST]"
+    - echo "PATH=[$DEPLOY_PATH]"
+    - ssh "$PRODUCTION_USER@$PRODUCTION_HOST" "pwd"
       ssh "$PRODUCTION_USER@$PRODUCTION_HOST"
       "cd $DEPLOY_PATH &&
       git fetch origin &&
