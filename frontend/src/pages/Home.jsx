@@ -7,16 +7,16 @@ function Home({ planningMode, setPlanningMode }) {
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
-        <header className="border-b border-[#dbe7de] bg-white">
+        <header className="h-24 border-b border-[#dbe7de] bg-white">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
               <div className="flex items-center gap-4">
   <img
     src={logo}
     alt="PlanEat logo"
-    className="h-26 w-26 object-contain"
+    className="h-22 w-22 object-contain"
   />
 
-  <span className="text-5xl font-semibold tracking-tight text-[#1f5c4d]">
+  <span className="text-4xl font-semibold tracking-tight text-[#1f5c4d]">
     PlanEat
   </span>
 </div>
