@@ -132,7 +132,7 @@ function Home({ planningMode, setPlanningMode }) {
 </article>
             </section>
 
-            {/* CURRENT MODE CARD */}
+            {/* CURRENT MODE CARD 
             <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm">
               <p className="text-xl text-[#1f5c4d]">
                 Current mode:{' '}
@@ -147,7 +147,7 @@ function Home({ planningMode, setPlanningMode }) {
                 Continue to your inventory to start adding ingredients. Your
                 selected mode will guide the meal planning flow in the next
                 steps.
-              </p>
+              </p> */}
 
               <div className="mt-8">
                 <Link
@@ -156,7 +156,7 @@ function Home({ planningMode, setPlanningMode }) {
                 >
                   Continue to Inventory
                 </Link>
-              </div>
+              
             </div>
           </div>
         </main>
