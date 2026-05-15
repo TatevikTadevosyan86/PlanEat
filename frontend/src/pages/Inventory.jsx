@@ -12,7 +12,7 @@ function Inventory() {
   const [ingredientName, setIngredientName] = useState('')
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
-  const [ingredientState, setIngredientState] = useState('cooked') 
+  const [ingredientState, setIngredientState] = useState( '') 
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(true)
   const [ingredientError, setIngredientError] = useState('')
 
@@ -171,16 +171,17 @@ setIngredients((currentIngredients) =>
                               {ingredient.name}
                             </p>
                             <p className="mt-1 text-lg capitalize text-[#8ba095]">
-                              {ingredient.type}• {ingredient.state || 'cooked'}
+                             {ingredient.type}
+{ingredient.state ? ` - ${ingredient.state}` : ''}
                             </p>
                           </div>
 
                           <button
                             type="button"
                             onClick={() => handleDeleteIngredient(ingredient.id)}
-                            className="rounded-xl border border-[#d9e7dd] px-3 py-2 text-sm font-medium text-[#1f5c4d]"
-                          >
-                            Remove
+                            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ffe5e5] text-xl transition hover:bg-[#ffd6d6]"
+>
+  🗑️
                           </button>
                         </div>
                       </div>
