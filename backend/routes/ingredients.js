@@ -14,7 +14,7 @@ router.get('/', async (_req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const { name, type = 'fresh' } = req.body;
+    const { name, type = 'fresh' , state = 'baked'  } = req.body;
     const trimmedName = name?.trim();
     const existingIngredient = await Ingredient.findOne({
   name: new RegExp(`^${trimmedName}$`, 'i'),
@@ -36,6 +36,7 @@ if (existingIngredient) {
     const ingredient = await Ingredient.create({
       name: trimmedName,
       type,
+      state,
     });
 
     res.status(201).json(ingredient);

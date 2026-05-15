@@ -55,7 +55,7 @@ function AddIngredient({
             onChange={(event) => setIngredientState(event.target.value)}
             className="w-full rounded-2xl border border-[#d9e7dd] px-5 py-4 text-lg text-[#1f5c4d] outline-none"
           >
-            
+             <option value="">Select state</option>
             <option value="boiled">Boiled</option>
             <option value="steamed">Steamed</option>
             <option value="fried">Fried</option>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { useEffect, useState } from 'react'
+import { Trash2 } from 'lucide-react'
 import AddIngredient from '../components/AddIngredient.jsx'
 import {
   createIngredient,
@@ -12,7 +13,7 @@ function Inventory() {
   const [ingredientName, setIngredientName] = useState('')
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
-  const [ingredientState, setIngredientState] = useState( '') 
+  const [ingredientState, setIngredientState] = useState( 'baked') 
   const [isLoadingIngredients, setIsLoadingIngredients] = useState(true)
   const [ingredientError, setIngredientError] = useState('')
 
@@ -60,6 +61,7 @@ setIngredients((currentIngredients) => [
 
       setIngredientName('')
       setIngredientType('fresh')
+      setIngredientState('baked') 
     } catch (error) {
       setIngredientError(
         error.response?.data?.message ||
@@ -179,9 +181,9 @@ setIngredients((currentIngredients) =>
                           <button
                             type="button"
                             onClick={() => handleDeleteIngredient(ingredient.id)}
-                            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#ffe5e5] text-xl transition hover:bg-[#ffd6d6]"
+                            className="text-red-400 transition hover:text-red-600"
 >
-  🗑️
+  <Trash2 size={20} />
                           </button>
                         </div>
                       </div>
