@@ -3,6 +3,7 @@ import logo from '../assets/logo.png'
 import { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import AddIngredient from '../components/AddIngredient.jsx'
+import IngredientIcon from '../components/IngredientIcon.jsx'
 import {
   createIngredient,
   deleteIngredient,
@@ -168,6 +169,7 @@ setIngredients((currentIngredients) =>
                         className="rounded-2xl bg-[#f6f9f7] p-4"
                       >
                         <div className="flex items-start justify-between gap-4">
+                           <IngredientIcon name={ingredient.name} size={24} />
                           <div>
                             <p className="text-xl text-[#1f5c4d]">
                               {ingredient.name}
