@@ -261,7 +261,7 @@ useEffect(() => {
               <div className="mt-8">
                 <Link
                   to="/shopping-list"
-                  className="inline-block rounded-2xl bg-[#9db3a8] px-8 py-4 text-lg font-semibold text-white"
+                  className="inline-block rounded-2xl bg-[#1f5c4d] px-8 py-4 text-lg font-semibold text-white"
                 >
                   Go to Shopping List
                 </Link>
