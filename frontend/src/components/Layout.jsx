@@ -36,13 +36,38 @@ function Layout({ children }) {
         </main>
 
         {/* Footer */}
-        <footer className="mt-16 border-t border-[#dbe7de] bg-white px-6 py-6">
-          <div className="mx-auto grid max-w-7xl gap-6 text-center text-2xl font-medium text-[#1f5c4d] md:grid-cols-3">
-            <p>PlanEat</p>
-            <p>Quick Links</p>
-            <p>Support</p>
-          </div>
-        </footer>
+        <footer className="mt-16 border-t border-[#dbe7de] bg-white">
+  <div className="mx-auto max-w-7xl px-6 py-12">
+    <div className="grid gap-8 md:grid-cols-2">
+      {/* Brand Column */}
+      <div>
+        <h3 className="text-xl font-semibold text-[#1f5c4d]">PlanEat</h3>
+        <p className="mt-3 text-sm text-[#8ba095]">
+          Smart meal planning to reduce food waste and save money.
+        </p>
+        <p className="mt-4 text-sm text-[#8ba095]">
+          © 2026 PlanEat. All rights reserved.
+        </p>
+      </div>
+
+      {/* Support Column */}
+      <div>
+        <h4 className="font-semibold text-[#1f5c4d]">Support</h4>
+        <ul className="mt-3 space-y-2 text-sm text-[#8ba095]">
+          <li><a href="#" className="hover:text-[#1f5c4d] transition">FAQ</a></li>
+          <li><a href="#" className="hover:text-[#1f5c4d] transition">Contact Us</a></li>
+          <li><a href="#" className="hover:text-[#1f5c4d] transition">Privacy Policy</a></li>
+          <li><a href="#" className="hover:text-[#1f5c4d] transition">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {/* Bottom Bar */}
+    <div className="mt-8 pt-6 text-center text-xs text-[#8ba095] border-t border-[#dbe7de]">
+      <p>Made with 💚 for a waste-free kitchen</p>
+    </div>
+  </div>
+</footer>
       </div>
     </div>
   )
