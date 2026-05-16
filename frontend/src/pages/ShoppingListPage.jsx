@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 import { getLatestMealPlan } from '../services/mealPlans.js'
 
-// Category mapping for ingredients
+// Category mapping for ingredients with icons
 const ingredientCategories = {
   // Protein
   chicken: '🍗 Protein',
@@ -54,21 +54,17 @@ const ingredientCategories = {
 function getIngredientCategory(ingredientName) {
   const lowerName = ingredientName.toLowerCase()
   
-  // Check all keys in the mapping (full phrase match)
   for (const [key, category] of Object.entries(ingredientCategories)) {
     if (lowerName.includes(key)) {
       return category
     }
   }
   
-  // Fallback: check first word only
   const mainName = lowerName.split(' ')[0]
   return ingredientCategories[mainName] || '🛒 Other'
 }
 
-// Clean ingredient name by removing quantities
 function getCleanIngredientName(ingredient) {
-  // Remove quantities like "500g", "2tbsp", "50ml", "200g", etc.
   return ingredient.replace(/\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cup|cups)?/gi, '').trim()
 }
 
@@ -94,7 +90,6 @@ function ShoppingListPage() {
     loadLatestMealPlan()
   }, [])
 
-  // Group by category
   const groupByCategory = () => {
     const allMissing = []
     mealPlan.forEach((meal) => {
@@ -105,10 +100,8 @@ function ShoppingListPage() {
       }
     })
     
-    // Remove duplicates
     const uniqueIngredients = [...new Set(allMissing)]
     
-    // Group by category
     const grouped = {}
     uniqueIngredients.forEach((ingredient) => {
       const category = getIngredientCategory(ingredient)
@@ -120,7 +113,6 @@ function ShoppingListPage() {
     return grouped
   }
 
-  // Group by day
   const groupByDay = () => {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     const grouped = {}
@@ -133,7 +125,6 @@ function ShoppingListPage() {
     return grouped
   }
 
-  // Group by meal
   const groupByMeal = () => {
     const grouped = {}
     mealPlan.forEach((meal) => {
@@ -160,9 +151,8 @@ function ShoppingListPage() {
   const groupedData = getGroupedData()
   const hasMissingItems = Object.keys(groupedData).length > 0
 
-  // Sort categories in a logical order
   const getSortedCategories = (data) => {
-    const order = ['🍗 Protein', '🥬 Vegetables', '🥛 Dairy', '🍚 Grains', '🧂 Sauces', '🧂 Other', '🛒 Other']
+    const order = ['🍗 Protein', '🥬 Vegetables', '🥛 Dairy', '🍚 Grains', '🧂 Sauces', '📦 Other', '🛒 Other']
     return Object.keys(data).sort((a, b) => {
       const indexA = order.indexOf(a) !== -1 ? order.indexOf(a) : 999
       const indexB = order.indexOf(b) !== -1 ? order.indexOf(b) : 999
@@ -204,7 +194,6 @@ function ShoppingListPage() {
               </p>
             </section>
 
-            {/* Group By Selector */}
             {!isLoadingMealPlan && !shoppingListError && hasMissingItems && (
               <div className="mb-6 flex flex-wrap items-center gap-4 rounded-2xl bg-white p-4 shadow-sm">
                 <span className="text-lg font-medium text-[#1f5c4d]">Group by:</span>
@@ -217,7 +206,7 @@ function ShoppingListPage() {
                         : 'bg-[#eef9f2] text-[#1f5c4d] hover:bg-[#dcebe0]'
                     }`}
                   >
-                    🥬 Category
+                    Category
                   </button>
                   <button
                     onClick={() => setGroupBy('day')}
@@ -227,7 +216,7 @@ function ShoppingListPage() {
                         : 'bg-[#eef9f2] text-[#1f5c4d] hover:bg-[#dcebe0]'
                     }`}
                   >
-                    📅 Day
+                    Day
                   </button>
                   <button
                     onClick={() => setGroupBy('meal')}
@@ -237,13 +226,12 @@ function ShoppingListPage() {
                         : 'bg-[#eef9f2] text-[#1f5c4d] hover:bg-[#dcebe0]'
                     }`}
                   >
-                    🍽️ Meal
+                    Meal
                   </button>
                 </div>
               </div>
             )}
 
-            {/* Content */}
             {isLoadingMealPlan ? (
               <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
                 <p className="text-lg text-[#8ba095]">Loading latest meal plan...</p>
@@ -287,7 +275,6 @@ function ShoppingListPage() {
                   </div>
                 ))}
 
-                {/* Summary */}
                 <div className="rounded-3xl bg-[#eef9f2] p-6 text-center">
                   <p className="text-lg text-[#1f5c4d]">
                     Total missing items: <span className="font-bold">
