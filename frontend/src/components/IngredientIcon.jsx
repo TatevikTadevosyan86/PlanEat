@@ -2,13 +2,14 @@ import {
   Egg, 
   Beef, 
   Carrot, 
-  Milk, 
-  Rice, 
+  Milk,  
   Wheat, 
   Apple, 
   Fish, 
   ChefHat,
-  Utensils
+  Utensils,
+  Soup,
+  Coffee
 } from 'lucide-react'
 
 // Map ingredient names to icons and colors
@@ -38,7 +39,7 @@ const ingredientIconMap = {
   butter: { icon: Milk, color: '#f5e6c8', label: 'Butter' },
   
   // Grains
-  rice: { icon: Rice, color: '#e8d8b0', label: 'Rice' },
+  rice: { icon: Wheat, color: '#e8d8b0', label: 'Rice' },
   pasta: { icon: Wheat, color: '#f0d8a0', label: 'Pasta' },
   bread: { icon: Wheat, color: '#d4a373', label: 'Bread' },
   
