@@ -132,22 +132,7 @@ function Home({ planningMode, setPlanningMode }) {
 </article>
             </section>
 
-            {/* CURRENT MODE CARD 
-            <div className="mt-10 rounded-3xl bg-white p-8 shadow-sm">
-              <p className="text-xl text-[#1f5c4d]">
-                Current mode:{' '}
-                <span className="font-semibold">
-                  {planningMode === 'smart'
-                    ? 'Smart Mode'
-                    : 'Fresh Mode'}
-                </span>
-              </p>
-
-              <p className="mt-4 text-lg leading-8 text-[#7f958a]">
-                Continue to your inventory to start adding ingredients. Your
-                selected mode will guide the meal planning flow in the next
-                steps.
-              </p> */}
+   
 
               <div className="mt-8">
                 <Link
