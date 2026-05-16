@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+
 import { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 import AddIngredient from '../components/AddIngredient.jsx'
@@ -86,38 +86,7 @@ setIngredients((currentIngredients) =>
   }
 
   return (
-    <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
-          <div className="flex min-h-screen flex-col">
-            <header className="h-24 border-b border-[#dbe7de] bg-white">
-              <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                  <div className="flex items-center gap-4">
-      <img
-        src={logo}
-        alt="PlanEat logo"
-        className="h-22 w-22 object-contain"
-      />
-    
-      <span className="text-4xl font-semibold tracking-tight text-[#1f5c4d]">
-        PlanEat
-      </span>
-    </div>
-
-            <nav className="hidden items-center gap-10 text-xl font-medium text-[#7c9488] md:flex">
-              <Link to="/">Home</Link>
-              <Link
-                to="/inventory"
-                className="rounded-xl bg-[#dcebe0] px-5 py-2 text-[#1f5c4d]"
-              >
-                Inventory
-              </Link>
-              <Link to="/meal-plan">Meal Plan</Link>
-              <Link to="/shopping-list">Shopping List</Link>
-            </nav>
-          </div>
-        </header>
-
-        <main className="flex-1 px-6 py-10">
-          <div className="mx-auto max-w-6xl">
+    <>
             <section className="mb-10">
               <h1 className="text-5xl font-semibold tracking-tight">
                 Inventory
@@ -203,10 +172,8 @@ setIngredients((currentIngredients) =>
                 Continue to Meal Plan
               </Link>
             </div>
-          </div>
-        </main>
-      </div>
-    </div>
+          
+       </>
   )
 }
 

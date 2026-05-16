@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import logo from '../assets/logo.png'
+
 import freshImage from '../assets/fresh.png'
 import smartImage from '../assets/smart.png'
 
