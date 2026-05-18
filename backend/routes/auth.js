@@ -3,6 +3,8 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
+const auth = require('../middleware/auth');
+
 
 router.post('/register', async (req, res, next) => {
   try {
@@ -92,6 +94,27 @@ router.post('/login', async (req, res, next) => {
     res.json({
       message: 'Login successful.',
       token,
+      user: {
+        id: user._id,
+        email: user.email,
+        name: user.name,
+      },
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+router.get('/me', auth, async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password');
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found.',
+      });
+    }
+
+    res.json({
       user: {
         id: user._id,
         email: user.email,
