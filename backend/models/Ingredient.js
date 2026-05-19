@@ -18,6 +18,12 @@ const ingredientSchema = new mongoose.Schema(
       enum: ['boiled', 'steamed', 'fried', 'baked', 'grilled', 'chopped', 'cooked'],
       default: 'cooked',
   },
+  userId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'User',
+  required: true,
+},
+
 },
   {
     timestamps: true,
