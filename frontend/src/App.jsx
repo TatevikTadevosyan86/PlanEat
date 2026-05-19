@@ -6,6 +6,9 @@ import Inventory from './pages/Inventory.jsx'
 import MealPlan from './pages/MealPlan.jsx'
 import ShoppingListPage from './pages/ShoppingListPage.jsx'
 import MealDetail from './pages/MealDetail.jsx'
+import Login from './pages/Login.jsx'
+import Register from './pages/Register.jsx'
+
 
 function App() {
   const [planningMode, setPlanningMode] = useState('smart')
