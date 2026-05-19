@@ -32,7 +32,7 @@ setUser(data.user)
   }
 
   return (
-    <div className="min-h-screen bg-[#f7faf7] px-6 py-10 text-[#1f5c4d]">
+    
       <div className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-[#1f5c4d] shadow-sm">
 
         <h1 className="text-4xl font-semibold tracking-tight">Login</h1>
@@ -78,7 +78,7 @@ setUser(data.user)
           </Link>
         </p>
       </div>
-    </div>
+    
   )
 }
 
