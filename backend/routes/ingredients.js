@@ -8,7 +8,9 @@ router.use(auth);
 
 router.get('/', async (_req, res, next) => {
   try {
-    const ingredients = await Ingredient.find().sort({ createdAt: -1 });
+   const ingredients = await Ingredient.find({
+    userId: req.user.userId,
+  }).sort({ createdAt: -1 });
     res.json(ingredients);
   } catch (error) {
     next(error);
@@ -20,6 +22,7 @@ router.post('/', async (req, res, next) => {
     const { name, type = 'fresh' , state = 'baked'  } = req.body;
     const trimmedName = name?.trim();
     const existingIngredient = await Ingredient.findOne({
+      userId: req.user.userId,
   name: new RegExp(`^${trimmedName}$`, 'i'),
   type,
 });
