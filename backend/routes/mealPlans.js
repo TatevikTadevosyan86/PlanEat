@@ -10,7 +10,9 @@ router.use(auth);
 
 router.get('/latest', async (_req, res, next) => {
   try {
-    const latestMealPlan = await MealPlan.findOne().sort({ createdAt: -1 });
+    const latestMealPlan = await MealPlan.findOne({
+  userId: req.user.userId,
+}).sort({ createdAt: -1 });
 
     if (!latestMealPlan) {
       return res.status(404).json({
