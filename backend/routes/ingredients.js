@@ -54,7 +54,10 @@ if (existingIngredient) {
 
 router.delete('/:id', async (req, res, next) => {
   try {
-    const ingredient = await Ingredient.findByIdAndDelete(req.params.id);
+    const ingredient = await Ingredient.findOneAndDelete({
+  _id: req.params.id,
+  userId: req.user.userId,
+})
 
     if (!ingredient) {
       return res.status(404).json({
