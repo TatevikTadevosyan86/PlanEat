@@ -111,9 +111,22 @@ function handleLogout() {
              </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Login setUser={setUser} setToken={setToken} />} />
-<Route path="/register" element={<Register />} />
-
+        <Route
+  path="/login"
+  element={
+    <Layout user={user} handleLogout={handleLogout}>
+      <Login setUser={setUser} setToken={setToken} />
+    </Layout>
+  }
+/>
+<Route
+  path="/register"
+  element={
+    <Layout user={user} handleLogout={handleLogout}>
+      <Register />
+    </Layout>
+  }
+/>
       </Routes>
     </BrowserRouter>
   )
