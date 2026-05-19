@@ -49,6 +49,11 @@ function App() {
       </div>
     )
   }
+function handleLogout() {
+  localStorage.removeItem('token')
+  setToken(null)
+  setUser(null)
+}
 
   return (
     <BrowserRouter>
@@ -60,6 +65,8 @@ function App() {
               <Home
                 planningMode={planningMode}
                 setPlanningMode={setPlanningMode}
+                user={user}
+                handleLogout={handleLogout}
               />
             </Layout>
           }
