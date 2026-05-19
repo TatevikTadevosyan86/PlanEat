@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logo from '../assets/logo.png'
 
-function Layout({ children }) {
+function Layout({ children, user, handleLogout }) {
   return (
     <div className="min-h-screen bg-[#f7faf7] text-[#1f5c4d]">
       <div className="flex min-h-screen flex-col">
@@ -24,6 +24,27 @@ function Layout({ children }) {
               <Link to="/inventory" className="hover:text-[#1f5c4d]">Inventory</Link>
               <Link to="/meal-plan" className="hover:text-[#1f5c4d]">Meal Plan</Link>
               <Link to="/shopping-list" className="hover:text-[#1f5c4d]">Shopping List</Link>
+              {user ? (
+    <>
+      <span className="text-[#1f5c4d]">{user.name || user.email}</span>
+      <button
+        type="button"
+        onClick={handleLogout}
+        className="hover:text-[#1f5c4d]"
+      >
+        Logout
+      </button>
+    </>
+  ) : (
+    <>
+      <Link to="/login" className="hover:text-[#1f5c4d]">
+        Login
+      </Link>
+      <Link to="/register" className="hover:text-[#1f5c4d]">
+        Register
+      </Link>
+    </>
+  )}
             </nav>
           </div>
         </header>

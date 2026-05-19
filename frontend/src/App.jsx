@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Layout from './components/Layout'
 import Home from './pages/Home.jsx'
@@ -10,6 +10,8 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import { getCurrentUser } from './services/auth.js'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import { useEffect, useState } from 'react'
+
 
 
 
@@ -61,12 +63,12 @@ function handleLogout() {
         <Route
           path="/"
           element={
-            <Layout>
+            <Layout user={user}
+                handleLogout={handleLogout}>
               <Home
                 planningMode={planningMode}
                 setPlanningMode={setPlanningMode}
-                user={user}
-                handleLogout={handleLogout}
+                
               />
             </Layout>
           }
@@ -75,7 +77,7 @@ function handleLogout() {
           path="/inventory"
           element={
             <ProtectedRoute user={user}>
-              <Layout>
+              <Layout user={user} handleLogout={handleLogout}>
               <Inventory />
             </Layout>
              </ProtectedRoute>
@@ -85,7 +87,7 @@ function handleLogout() {
           path="/meal-plan"
           element={
              <ProtectedRoute user={user}>
-              <Layout>
+              <Layout user={user} handleLogout={handleLogout}>
               <MealPlan planningMode={planningMode} />
             </Layout>
             </ProtectedRoute>
@@ -94,7 +96,7 @@ function handleLogout() {
         <Route
           path="/meal-plan/:id"
           element={
-            <Layout>
+            <Layout user={user} handleLogout={handleLogout}>
               <MealDetail />
             </Layout>
           }
@@ -103,13 +105,13 @@ function handleLogout() {
           path="/shopping-list"
           element={
            <ProtectedRoute user={user}>
-             <Layout>
+             <Layout user={user} handleLogout={handleLogout}>
               <ShoppingListPage />
             </Layout>
              </ProtectedRoute>
           }
         />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUser} setToken={setToken} />} />
 <Route path="/register" element={<Register />} />
 
       </Routes>
