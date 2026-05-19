@@ -40,6 +40,7 @@ if (existingIngredient) {
     }
 
     const ingredient = await Ingredient.create({
+      userId: req.user.userId,
       name: trimmedName,
       type,
       state,
