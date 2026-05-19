@@ -44,7 +44,8 @@ function Register() {
 
   return (
     <div className="min-h-screen bg-[#f7faf7] px-6 py-10 text-[#1f5c4d]">
-      <div className="mx-auto max-w-xl rounded-3xl bg-white p-8 shadow-sm">
+      <div className="mx-auto max-w-xl rounded-3xl bg-white p-8 text-[#1f5c4d] shadow-sm">
+
         <h1 className="text-4xl font-semibold tracking-tight">Register</h1>
         <p className="mt-3 text-lg text-[#8ba095]">
           Create an account to use protected features in PlanEat.
