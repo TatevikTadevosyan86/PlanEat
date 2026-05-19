@@ -1,7 +1,12 @@
 const express = require('express');
 const MealPlan = require('../models/MealPlan');
+const auth = require('../middleware/auth');
+
 
 const router = express.Router();
+router.use(auth);
+
+
 
 router.get('/latest', async (_req, res, next) => {
   try {
