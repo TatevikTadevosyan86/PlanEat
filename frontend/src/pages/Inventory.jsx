@@ -10,7 +10,7 @@ import {
   getIngredients,
 } from '../services/ingredients.js'
 
-function Inventory() {
+function Inventory({ token }) {
   const [ingredientName, setIngredientName] = useState('')
   const [ingredientType, setIngredientType] = useState('fresh')
   const [ingredients, setIngredients] = useState([])
@@ -24,8 +24,8 @@ function Inventory() {
         setIsLoadingIngredients(true)
         setIngredientError('')
 
-        const savedIngredients = await getIngredients()
-setIngredients(savedIngredients)
+        const savedIngredients = await getIngredients(token)
+        setIngredients(savedIngredients)
 
       } catch {
         setIngredientError('Could not load ingredients from the server.')
@@ -35,7 +35,7 @@ setIngredients(savedIngredients)
     }
 
     loadIngredients()
-  }, [])
+  }, [token])
 
   async function handleAddIngredient(event) {
     event.preventDefault()
@@ -48,16 +48,19 @@ setIngredients(savedIngredients)
     try {
       setIngredientError('')
 
-      const savedIngredient = await createIngredient({
-  name: trimmedName,
-  type: ingredientType,
-  state: ingredientState, 
-})
+      const savedIngredient = await createIngredient(
+        {
+          name: trimmedName,
+          type: ingredientType,
+          state: ingredientState,
+        },
+        token
+      )
 
-setIngredients((currentIngredients) => [
-  savedIngredient,
-  ...currentIngredients,
-])
+      setIngredients((currentIngredients) => [
+        savedIngredient,
+        ...currentIngredients,
+      ])
 
 
       setIngredientName('')
@@ -75,10 +78,10 @@ setIngredients((currentIngredients) => [
     try {
       setIngredientError('')
 
-      await deleteIngredient(id)
-setIngredients((currentIngredients) =>
-  currentIngredients.filter((ingredient) => ingredient.id !== id)
-)
+      await deleteIngredient(id, token)
+      setIngredients((currentIngredients) =>
+        currentIngredients.filter((ingredient) => ingredient.id !== id)
+      )
 
     } catch {
       setIngredientError('Could not remove ingredient. Please try again.')

@@ -78,18 +78,18 @@ function handleLogout() {
           element={
             <ProtectedRoute user={user}>
               <Layout user={user} handleLogout={handleLogout}>
-              <Inventory />
-            </Layout>
-             </ProtectedRoute>
+                <Inventory token={token} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
           path="/meal-plan"
           element={
-             <ProtectedRoute user={user}>
+            <ProtectedRoute user={user}>
               <Layout user={user} handleLogout={handleLogout}>
-              <MealPlan planningMode={planningMode} />
-            </Layout>
+                <MealPlan planningMode={planningMode} token={token} />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -104,11 +104,11 @@ function handleLogout() {
         <Route
           path="/shopping-list"
           element={
-           <ProtectedRoute user={user}>
-             <Layout user={user} handleLogout={handleLogout}>
-              <ShoppingListPage />
-            </Layout>
-             </ProtectedRoute>
+            <ProtectedRoute user={user}>
+              <Layout user={user} handleLogout={handleLogout}>
+                <ShoppingListPage token={token} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route

@@ -11,16 +11,31 @@ function mapIngredient(ingredient) {
   }
 }
 
-export async function getIngredients() {
-  const response = await axios.get(`${apiBaseUrl}/ingredients`)
+function getAuthConfig(token) {
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+}
+
+export async function getIngredients(token) {
+  const response = await axios.get(
+    `${apiBaseUrl}/ingredients`,
+    getAuthConfig(token)
+  )
   return response.data.map(mapIngredient)
 }
 
-export async function createIngredient(ingredient) {
-  const response = await axios.post(`${apiBaseUrl}/ingredients`, ingredient)
+export async function createIngredient(ingredient, token) {
+  const response = await axios.post(
+    `${apiBaseUrl}/ingredients`,
+    ingredient,
+    getAuthConfig(token)
+  )
   return mapIngredient(response.data)
 }
 
-export async function deleteIngredient(id) {
-  await axios.delete(`${apiBaseUrl}/ingredients/${id}`)
+export async function deleteIngredient(id, token) {
+  await axios.delete(`${apiBaseUrl}/ingredients/${id}`, getAuthConfig(token))
 }

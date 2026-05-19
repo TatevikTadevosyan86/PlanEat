@@ -68,7 +68,7 @@ function getCleanIngredientName(ingredient) {
   return ingredient.replace(/\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cup|cups)?/gi, '').trim()
 }
 
-function ShoppingListPage() {
+function ShoppingListPage({ token }) {
   const [mealPlan, setMealPlan] = useState([])
   const [isLoadingMealPlan, setIsLoadingMealPlan] = useState(true)
   const [shoppingListError, setShoppingListError] = useState('')
@@ -79,7 +79,7 @@ function ShoppingListPage() {
       try {
         setIsLoadingMealPlan(true)
         setShoppingListError('')
-        const latestMealPlan = await getLatestMealPlan()
+        const latestMealPlan = await getLatestMealPlan(token)
         setMealPlan(latestMealPlan.meals)
       } catch {
         setShoppingListError('No saved meal plan found. Generate a meal plan first.')
@@ -88,7 +88,7 @@ function ShoppingListPage() {
       }
     }
     loadLatestMealPlan()
-  }, [])
+  }, [token])
 
   const groupByCategory = () => {
     const allMissing = []

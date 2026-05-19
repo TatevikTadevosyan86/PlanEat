@@ -6,7 +6,7 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 router.use(auth);
 
-router.get('/', async (_req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
    const ingredients = await Ingredient.find({
     userId: req.user.userId,

@@ -5,7 +5,7 @@ import { getRecipes } from '../services/recipes.js'
 import { getIngredients } from '../services/ingredients.js'
 import { createMealPlan, getLatestMealPlan } from '../services/mealPlans.js'
 
-function MealPlan({ planningMode }) {
+function MealPlan({ planningMode, token }) {
   const [ingredients, setIngredients] = useState([])
   const [recipes, setRecipes] = useState([])
   const [mealPlan, setMealPlan] = useState([])
@@ -20,7 +20,7 @@ function MealPlan({ planningMode }) {
         setIsDataLoading(true)
         setDataLoadError('')
         const [savedIngredients, savedRecipes] = await Promise.all([
-          getIngredients(),
+          getIngredients(token),
           getRecipes()
         ])
         setIngredients(savedIngredients)
@@ -32,13 +32,13 @@ function MealPlan({ planningMode }) {
       }
     }
     loadData()
-  }, [])
+  }, [token])
 
   // Load saved meal plan from backend on page load
   useEffect(() => {
     async function loadSavedMealPlan() {
       try {
-        const savedPlan = await getLatestMealPlan()
+        const savedPlan = await getLatestMealPlan(token)
         if (savedPlan && savedPlan.meals && savedPlan.meals.length > 0) {
           const loadedMeals = savedPlan.meals.map(meal => ({
             _id: meal.recipeId,
@@ -58,7 +58,7 @@ function MealPlan({ planningMode }) {
       }
     }
     loadSavedMealPlan()
-  }, [])
+  }, [token])
 
   async function handleGenerateMealPlan() {
     setIsGenerating(true)
@@ -117,10 +117,13 @@ function MealPlan({ planningMode }) {
     }))
 
     try {
-      await createMealPlan({
-        planningMode,
-        meals: mealsWithDays,
-      })
+      await createMealPlan(
+        {
+          planningMode,
+          meals: mealsWithDays,
+        },
+        token
+      )
       console.log('✅ Meal plan saved to backend')
     } catch (error) {
       console.error('Failed to save meal plan:', error)

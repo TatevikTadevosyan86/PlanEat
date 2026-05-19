@@ -8,7 +8,7 @@ router.use(auth);
 
 
 
-router.get('/latest', async (_req, res, next) => {
+router.get('/latest', async (req, res, next) => {
   try {
     const latestMealPlan = await MealPlan.findOne({
   userId: req.user.userId,
