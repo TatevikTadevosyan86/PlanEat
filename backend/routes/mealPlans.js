@@ -39,6 +39,7 @@ router.post('/', async (req, res, next) => {
     const mealPlan = await MealPlan.create({
       planningMode,
       meals,
+      userId: req.user.userId,
     });
 
     res.status(201).json(mealPlan);
