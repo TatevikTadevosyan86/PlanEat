@@ -96,9 +96,11 @@ function handleLogout() {
         <Route
           path="/meal-plan/:id"
           element={
-            <Layout user={user} handleLogout={handleLogout}>
-              <MealDetail />
-            </Layout>
+            <ProtectedRoute user={user}>
+              <Layout user={user} handleLogout={handleLogout}>
+                <MealDetail token={token} />
+              </Layout>
+            </ProtectedRoute>
           }
         />
         <Route

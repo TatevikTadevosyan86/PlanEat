@@ -4,7 +4,7 @@ import axios from 'axios'
 import { CheckCircle2, XCircle } from 'lucide-react'
 import { getIngredients } from '../services/ingredients.js'
 
-function MealDetail() {
+function MealDetail({ token }) {
   const { id } = useParams()
   const [meal, setMeal] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -15,7 +15,7 @@ function MealDetail() {
       try {
         const [recipeRes, ingredientsRes] = await Promise.all([
           axios.get(`/api/recipes/${id}`),
-          getIngredients()
+          getIngredients(token)
         ])
         setMeal(recipeRes.data)
         setUserIngredients(ingredientsRes.map(i => i.name.toLowerCase()))
@@ -26,7 +26,7 @@ function MealDetail() {
       }
     }
     fetchData()
-  }, [id])
+  }, [id, token])
 
   if (loading) {
     return (
