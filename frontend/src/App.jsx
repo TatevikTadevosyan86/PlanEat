@@ -9,6 +9,8 @@ import MealDetail from './pages/MealDetail.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import { getCurrentUser } from './services/auth.js'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+
 
 
 function App() {
@@ -65,17 +67,21 @@ function App() {
         <Route
           path="/inventory"
           element={
-            <Layout>
+            <ProtectedRoute user={user}>
+              <Layout>
               <Inventory />
             </Layout>
+             </ProtectedRoute>
           }
         />
         <Route
           path="/meal-plan"
           element={
-            <Layout>
+             <ProtectedRoute user={user}>
+              <Layout>
               <MealPlan planningMode={planningMode} />
             </Layout>
+            </ProtectedRoute>
           }
         />
         <Route
@@ -89,9 +95,11 @@ function App() {
         <Route
           path="/shopping-list"
           element={
-            <Layout>
+           <ProtectedRoute user={user}>
+             <Layout>
               <ShoppingListPage />
             </Layout>
+             </ProtectedRoute>
           }
         />
         <Route path="/login" element={<Login />} />
