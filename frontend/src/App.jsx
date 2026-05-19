@@ -8,10 +8,45 @@ import ShoppingListPage from './pages/ShoppingListPage.jsx'
 import MealDetail from './pages/MealDetail.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
+import { getCurrentUser } from './services/auth.js'
 
 
 function App() {
   const [planningMode, setPlanningMode] = useState('smart')
+  const [user, setUser] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem('token'))
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+    useEffect(() => {
+    async function restoreSession() {
+      if (!token) {
+        setIsCheckingAuth(false)
+        return
+      }
+
+      try {
+        const data = await getCurrentUser(token)
+        setUser(data.user)
+      } catch {
+        localStorage.removeItem('token')
+        setToken(null)
+        setUser(null)
+      } finally {
+        setIsCheckingAuth(false)
+      }
+    }
+
+    restoreSession()
+  }, [token])
+
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-[#f7faf7] px-6 py-10 text-[#1f5c4d]">
+        <div className="mx-auto max-w-4xl">
+          <p className="text-xl text-[#8ba095]">Checking session...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <BrowserRouter>
