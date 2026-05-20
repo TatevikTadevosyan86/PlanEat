@@ -4,9 +4,10 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, '.', '')
+  const plugins = mode === 'test' ? [react()] : [react(), tailwindcss()]
 
   return {
-    plugins: [react(), tailwindcss()],
+    plugins,
     server: {
       host: '0.0.0.0',
       port: 5173,

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getLatestMealPlan } from '../services/mealPlans.js'
+import { getCleanIngredientName } from '../utils/shoppingList.js'
 
 // Category mapping for ingredients with icons
 const ingredientCategories = {
@@ -62,10 +63,6 @@ function getIngredientCategory(ingredientName) {
   
   const mainName = lowerName.split(' ')[0]
   return ingredientCategories[mainName] || '🛒 Other'
-}
-
-function getCleanIngredientName(ingredient) {
-  return ingredient.replace(/\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cup|cups)?/gi, '').trim()
 }
 
 function ShoppingListPage({ token }) {
