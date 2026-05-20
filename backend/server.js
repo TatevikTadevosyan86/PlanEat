@@ -101,4 +101,38 @@ async function startServer() {
   }
 }
 
-startServer();
+
+
+let server;
+
+async function startServer() {
+  try {
+    await connectToDatabase();
+
+    server = app.listen(port, () => {
+      console.log(`🚀 Server listening on http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error('Failed to start backend:', error.message);
+    process.exit(1);
+  }
+}
+
+// Graceful shutdown
+process.on('SIGINT', async () => {
+  console.log('SIGINT received. Closing server...');
+  await mongoose.disconnect();
+  if (server) {
+    server.close();
+  }
+  console.log('MongoDB disconnected.');
+  process.exit(0);
+});
+
+// Only start server if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+  startServer();
+}
+
+// Export for testing
+module.exports = { app, server };
