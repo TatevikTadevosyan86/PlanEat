@@ -7,7 +7,9 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "seed": "node scripts/seedRecipes.js",
-    "test": "node --test"
+   
+    "test": "vitest"
+    
   },
   "keywords": [],
   "author": "",
