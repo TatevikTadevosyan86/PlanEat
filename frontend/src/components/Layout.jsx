@@ -26,16 +26,22 @@ function Layout({ children, user, handleLogout }) {
               <Link to="/meal-plan" className="hover:text-[#1f5c4d]">Meal Plan</Link>
               <Link to="/shopping-list" className="hover:text-[#1f5c4d]">Shopping List</Link>
               {user ? (
-    <>
-      <span className="text-[#1f5c4d]">{user.name || user.email}</span>
-      <button
-        type="button"
-        onClick={handleLogout}
-        className="hover:text-[#1f5c4d]"
-      >
-        Logout
-      </button>
-    </>
+   <div className="ml-6 flex items-center gap-4 border-l border-[#dbe7de] pl-6">
+  <div className="flex flex-col leading-tight">
+    <span className="text-sm text-[#8ba095]">Welcome</span>
+    <span className="font-medium text-[#1f5c4d]">
+      {user.name || user.email}
+    </span>
+  </div>
+
+  <button
+    type="button"
+    onClick={handleLogout}
+    className="rounded-full bg-[#eef6f1] px-4 py-2 text-sm font-medium text-[#1f5c4d] transition hover:bg-[#dfeee5]"
+  >
+    Logout
+  </button>
+</div>
   ) : (
     
     <div className="ml-6 flex items-center gap-3 border-l border-[#dbe7de] pl-6">
