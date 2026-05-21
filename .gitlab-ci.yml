@@ -41,6 +41,12 @@ frontend_lint:
     - cd frontend
     - npm ci
     - npm run lint
+frontend_test:
+  stage: test
+  script:
+    - cd frontend
+    - npm ci
+    - npm run test
 
 # Frontend build job.
 frontend_build:
