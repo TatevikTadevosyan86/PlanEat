@@ -32,7 +32,8 @@ backend_test:
     - cd backend
     - npm ci
     - node --check server.js
-    - npm test || echo "No tests yet"
+    - npm run test:unit
+    - npm run test:integration
 
 # Frontend linting job.
 frontend_lint:

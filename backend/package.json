@@ -8,7 +8,10 @@
     "start": "node server.js",
     "seed": "node scripts/seedRecipes.js",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "test:unit": "vitest tests/unit",
+    "test:integration": "vitest tests/integration",
+    "test:watch": "vitest --watch"
   },
   "keywords": [],
   "author": "",
