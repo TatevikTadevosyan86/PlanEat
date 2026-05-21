@@ -58,7 +58,7 @@ describe('User Registration', () => {
 
 // ============ LOGIN TESTS ============
 describe('User Login', () => {
-  // Mock user database (simulates what your backend would check)
+
   const mockUsers = [
     { email: 'user@example.com', password: '123456' },
     { email: 'test@domain.se', password: 'password123' }
