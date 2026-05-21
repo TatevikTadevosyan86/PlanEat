@@ -12,14 +12,15 @@ function Layout({ children, user, handleLogout }) {
               <img
                 src={logo}
                 alt="PlanEat logo"
-                className="h-22 w-22 object-contain"
+                className="h-20 w-20 object-contain"
               />
               <span className="text-4xl font-semibold tracking-tight text-[#1f5c4d]">
                 PlanEat
               </span>
             </div>
 
-            <nav className="hidden items-center gap-10 text-xl font-medium text-[#7c9488] md:flex">
+            <nav className="hidden items-center text-lg font-medium text-[#7c9488] md:flex">
+  <div className="flex items-center gap-8">
               <Link to="/" className="hover:text-[#1f5c4d]">Home</Link>
               <Link to="/inventory" className="hover:text-[#1f5c4d]">Inventory</Link>
               <Link to="/meal-plan" className="hover:text-[#1f5c4d]">Meal Plan</Link>
@@ -36,15 +37,23 @@ function Layout({ children, user, handleLogout }) {
       </button>
     </>
   ) : (
-    <>
-      <Link to="/login" className="hover:text-[#1f5c4d]">
-        Login
-      </Link>
-      <Link to="/register" className="hover:text-[#1f5c4d]">
-        Register
-      </Link>
-    </>
-  )}
+    
+    <div className="ml-6 flex items-center gap-3 border-l border-[#dbe7de] pl-6">
+  <Link
+    to="/login"
+    className="px-4 py-2 text-[#5f776c] transition hover:text-[#1f5c4d]"
+  >
+    Login
+  </Link>
+
+  <Link
+    to="/register"
+    className="rounded-full bg-[#1f5c4d] px-5 py-2 text-white transition hover:bg-[#17463b]"
+  >
+    Register
+  </Link>
+</div>
+  )}    </div>
             </nav>
           </div>
         </header>
