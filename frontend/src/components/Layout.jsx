@@ -74,30 +74,49 @@ function Layout({ children, user, handleLogout }) {
         {/* Footer */}
         <footer className="mt-16 border-t border-[#dbe7de] bg-white">
   <div className="mx-auto max-w-7xl px-6 py-12">
-    <div className="grid gap-8 md:grid-cols-2">
-      {/* Brand Column */}
-      <div>
-        <h3 className="text-xl font-semibold text-[#1f5c4d]">PlanEat</h3>
-        <p className="mt-3 text-sm text-[#8ba095]">
-          Smart meal planning to reduce food waste and save money.
-        </p>
-        <p className="mt-4 text-sm text-[#8ba095]">
-          © 2026 PlanEat. All rights reserved.
-        </p>
-      </div>
+    <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+  {/* Brand Column */}
+  <div>
+    <h3 className="text-xl font-semibold text-[#1f5c4d]">
+      PlanEat
+    </h3>
 
-      {/* Support Column */}
-      <div>
-        <h4 className="font-semibold text-[#1f5c4d]">Support</h4>
-        <ul className="mt-3 space-y-2 text-sm text-[#8ba095]">
-          <li><a href="#" className="hover:text-[#1f5c4d] transition">FAQ</a></li>
-          <li><a href="#" className="hover:text-[#1f5c4d] transition">Contact Us</a></li>
-          <li><a href="#" className="hover:text-[#1f5c4d] transition">Privacy Policy</a></li>
-          <li><a href="#" className="hover:text-[#1f5c4d] transition">Terms of Service</a></li>
-        </ul>
-      </div>
-    </div>
+    <p className="mt-3 text-sm text-[#8ba095]">
+      Smart meal planning to reduce food waste and save money.
+    </p>
 
+    <p className="mt-4 text-sm text-[#8ba095]">
+      © 2026 PlanEat. All rights reserved.
+    </p>
+  </div>
+
+  {/* Support Column */}
+  <div className="md:text-right">
+    <h4 className="font-semibold text-[#1f5c4d]">
+      Support
+    </h4>
+
+    <ul className="mt-3 space-y-2 text-sm text-[#8ba095]">
+      <li>
+        <a
+          href="#"
+          className="transition hover:text-[#1f5c4d]"
+        >
+          FAQ
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="#"
+          className="transition hover:text-[#1f5c4d]"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
     {/* Bottom Bar */}
     <div className="mt-8 pt-6 text-center text-xs text-[#8ba095] border-t border-[#dbe7de]">
       <p>Made with 💚 for a waste-free kitchen</p>

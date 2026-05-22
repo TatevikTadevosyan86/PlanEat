@@ -16,7 +16,7 @@ const ingredientSchema = new mongoose.Schema(
     state: {
       type: String,
       enum: ['boiled', 'steamed', 'fried', 'baked', 'grilled', 'chopped', 'cooked'],
-      default: 'cooked',
+      
   },
   userId: {
   type: mongoose.Schema.Types.ObjectId,
