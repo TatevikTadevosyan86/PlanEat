@@ -44,7 +44,7 @@ const meals = [
     mainIngredient: 'chicken',
     usesLeftover: false,
     cuisine: 'italian',
-    image:'/images/recipes/Chicken_Pasta.png',
+    image:'/images/recipes/chicken_pasta.png',
     prepTime: 30,
   },
   {

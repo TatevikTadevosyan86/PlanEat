@@ -47,6 +47,7 @@ function MealPlan({ planningMode, token }) {
             usesLeftover: meal.usesLeftover,
             missingIngredients: meal.missingIngredients,
             score: meal.score,
+            image: meal.image,
           }))
           setMealPlan(loadedMeals)
           console.log('✅ Loaded saved meal plan from backend')
@@ -114,6 +115,7 @@ function MealPlan({ planningMode, token }) {
       usesLeftover: meal.usesLeftover,
       missingIngredients: meal.missingIngredients,
       score: meal.score,
+      image: meal.image,
     }))
 
     try {
@@ -173,66 +175,42 @@ function MealPlan({ planningMode, token }) {
                 </div>
               ) : (
                 <div className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                  {mealPlan.map((meal, index) => (
-                    <div
-                      key={meal._id}
-                      className="rounded-3xl border border-[#dbe7de] bg-white p-6 shadow-sm"
-                    >
-                      <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#8ba095]">
-                        {weekdays[index]}
-                      </p>
+  {mealPlan.map((meal, index) => (
+    <div
+      key={meal._id}
+      className="overflow-hidden rounded-3xl border border-[#dbe7de] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-md"
+    >
+      {/* Image */}
+      <div className="h-52 w-full bg-[#eef6f1]">
+        <img
+          src={meal.image || 'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?q=80&w=1200'}
+          alt={meal.name}
+          className="h-full w-full object-cover"
+        />
+      </div>
 
-                      <h3 className="mt-3 text-2xl font-semibold text-[#1f5c4d]">
-                        {meal.name}
-                      </h3>
+      {/* Content */}
+      <div className="p-6">
+        <p className="text-sm font-semibold uppercase tracking-[0.12em] text-[#8ba095]">
+          {weekdays[index]}
+        </p>
 
-                      <div className="mt-4">
-                        <span
-                          className={`inline-block rounded-full px-3 py-1 text-sm font-medium ${
-                            meal.usesLeftover
-                              ? 'bg-[#e3f0e7] text-[#1f5c4d]'
-                              : 'bg-[#f3f6f4] text-[#6f857b]'
-                          }`}
-                        >
-                          {meal.usesLeftover ? 'Leftover-friendly' : 'Fresh meal'}
-                        </span>
-                      </div>
+        <h3 className="mt-2 text-2xl font-semibold text-[#1f5c4d]">
+          {meal.name}
+        </h3>
 
-                      <div className="mt-5 space-y-2 text-lg text-[#6f857b]">
-                        <p>
-                          <span className="font-medium text-[#1f5c4d]">Main ingredient:</span>{' '}
-                          {meal.mainIngredient}
-                        </p>
-                      </div>
+        
 
-                      <Link
-                        to={`/meal-plan/${meal._id}`}
-                        className="mt-4 inline-block rounded-2xl bg-[#1f5c4d] px-6 py-2 text-white hover:bg-[#2b6a58]"
-                      >
-                        View Instructions →
-                      </Link>
-
-                      <div className="mt-5 rounded-2xl bg-[#f6f9f7] p-4">
-                        <p className="text-sm font-semibold uppercase tracking-[0.1em] text-[#8ba095]">
-                          Missing ingredients
-                        </p>
-                        <p
-                          className={`mt-2 text-lg ${
-                            meal.missingIngredients.length > 0
-                              ? 'text-[#a35f4b]'
-                              : 'text-[#2b6a58]'
-                          }`}
-                        >
-                          {meal.missingIngredients.length > 0
-                            ? meal.missingIngredients.join(', ')
-                            : 'None'}
-                        </p>
-                      </div>
-
-                      <p className="mt-4 text-sm text-[#8ba095]">Score: {meal.score}</p>
-                    </div>
-                  ))}
-                </div>
+        <Link
+          to={`/meal-plan/${meal._id}`}
+          className="mt-6 flex items-center justify-center rounded-2xl bg-[#1f5c4d] px-6 py-3 font-medium text-white transition hover:bg-[#2b6a58]"
+        >
+          View Instructions
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
               )}
             </section>
 

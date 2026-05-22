@@ -33,6 +33,11 @@ const mealSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    image: {                       
+      type: String,
+      default: '',
+    },
+    
   },
   
   { _id: true } 
