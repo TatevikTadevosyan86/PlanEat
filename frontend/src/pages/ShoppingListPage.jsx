@@ -2,68 +2,11 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { getLatestMealPlan } from '../services/mealPlans.js'
-import { getCleanIngredientName } from '../utils/shoppingList.js'
-
-// Category mapping for ingredients
-const ingredientCategories = {
-  // Protein
-  chicken: '🍗 Protein',
-  'ground beef': '🍗 Protein',
-  beef: '🍗 Protein',
-  pork: '🍗 Protein',
-  meat: '🍗 Protein',
-  'leftover meat': '🍗 Protein',
-  eggs: '🍗 Protein',
-  fish: '🍗 Protein',
-
-  // Vegetables
-  tomato: '🥬 Vegetables',
-  onion: '🥬 Vegetables',
-  carrot: '🥬 Vegetables',
-  lettuce: '🥬 Vegetables',
-  potato: '🥬 Vegetables',
-  peas: '🥬 Vegetables',
-  garlic: '🥬 Vegetables',
-  basil: '🥬 Vegetables',
-  vegetables: '🥬 Vegetables',
-  'any vegetables': '🥬 Vegetables',
-
-  // Dairy
-  cheese: '🥛 Dairy',
-  milk: '🥛 Dairy',
-  cream: '🥛 Dairy',
-  parmesan: '🥛 Dairy',
-  'sour cream': '🥛 Dairy',
-  butter: '🥛 Dairy',
-
-  // Grains
-  rice: '🍚 Grains',
-  pasta: '🍚 Grains',
-  tortilla: '🍚 Grains',
-  breadcrumbs: '🍚 Grains',
-  bread: '🍚 Grains',
-
-  // Sauces & Condiments
-  'soy sauce': '🧂 Sauces',
-  sauce: '🧂 Sauces',
-  salsa: '🧂 Sauces',
-  broth: '📦 Other',
-  oil: '📦 Other',
-  spice: '📦 Other',
-}
-
-function getIngredientCategory(ingredientName) {
-  const lowerName = ingredientName.toLowerCase()
-
-  for (const [key, category] of Object.entries(ingredientCategories)) {
-    if (lowerName.includes(key)) {
-      return category
-    }
-  }
-
-  const mainName = lowerName.split(' ')[0]
-  return ingredientCategories[mainName] || '🛒 Other'
-}
+import {
+  getCleanIngredientName,
+  getIngredientCategory,
+  getSortedShoppingCategories,
+} from '../utils/shoppingList.js'
 
 function ShoppingListPage({ token }) {
   const [mealPlan, setMealPlan] = useState([])
@@ -78,7 +21,6 @@ function ShoppingListPage({ token }) {
         setShoppingListError('')
 
         const latestMealPlan = await getLatestMealPlan(token)
-
         setMealPlan(latestMealPlan.meals)
       } catch {
         setShoppingListError(
@@ -92,7 +34,6 @@ function ShoppingListPage({ token }) {
     loadLatestMealPlan()
   }, [token])
 
-  // GROUP BY CATEGORY
   const groupByCategory = () => {
     const grouped = {}
 
@@ -111,7 +52,6 @@ function ShoppingListPage({ token }) {
       })
     })
 
-    // Remove duplicates
     Object.keys(grouped).forEach((category) => {
       grouped[category] = [...new Set(grouped[category])]
     })
@@ -119,7 +59,6 @@ function ShoppingListPage({ token }) {
     return grouped
   }
 
-  // GROUP BY DAY
   const groupByDay = () => {
     const days = [
       'Monday',
@@ -139,8 +78,8 @@ function ShoppingListPage({ token }) {
       if (meal.missingIngredients?.length > 0) {
         grouped[day] = {
           mealName: meal.name,
-          ingredients: meal.missingIngredients.map((ing) =>
-            getCleanIngredientName(ing)
+          ingredients: meal.missingIngredients.map((ingredient) =>
+            getCleanIngredientName(ingredient)
           ),
         }
       }
@@ -153,24 +92,6 @@ function ShoppingListPage({ token }) {
     groupBy === 'category' ? groupByCategory() : groupByDay()
 
   const hasMissingItems = Object.keys(groupedData).length > 0
-
-  const getSortedCategories = (data) => {
-    const order = [
-      '🍗 Protein',
-      '🥬 Vegetables',
-      '🥛 Dairy',
-      '🍚 Grains',
-      '🧂 Sauces',
-      '📦 Other',
-      '🛒 Other',
-    ]
-
-    return Object.keys(data).sort((a, b) => {
-      const indexA = order.indexOf(a) !== -1 ? order.indexOf(a) : 999
-      const indexB = order.indexOf(b) !== -1 ? order.indexOf(b) : 999
-      return indexA - indexB
-    })
-  }
 
   return (
     <>
@@ -238,7 +159,7 @@ function ShoppingListPage({ token }) {
       ) : !hasMissingItems ? (
         <div className="mt-6 rounded-3xl bg-white p-8 shadow-sm">
           <div className="text-center">
-            <span className="text-6xl">🎉</span>
+            <span className="text-6xl">All set</span>
 
             <p className="mt-4 text-xl font-semibold text-[#1f5c4d]">
               You have all the ingredients!
@@ -252,17 +173,10 @@ function ShoppingListPage({ token }) {
       ) : groupBy === 'day' ? (
         <div className="mt-6 space-y-6">
           {Object.keys(groupedData).map((day) => (
-            <div
-              key={day}
-              className="rounded-3xl bg-white p-6 shadow-sm"
-            >
-              <h2 className="text-2xl font-semibold text-[#1f5c4d]">
-                {day}
-              </h2>
+            <div key={day} className="rounded-3xl bg-white p-6 shadow-sm">
+              <h2 className="text-2xl font-semibold text-[#1f5c4d]">{day}</h2>
 
-              <p className="mt-1 text-[#8ba095]">
-                {groupedData[day].mealName}
-              </p>
+              <p className="mt-1 text-[#8ba095]">{groupedData[day].mealName}</p>
 
               <ul className="mt-5 space-y-3">
                 {groupedData[day].ingredients.map((ingredient, idx) => (
@@ -270,8 +184,7 @@ function ShoppingListPage({ token }) {
                     key={idx}
                     className="flex items-center gap-3 text-lg text-[#1f5c4d]"
                   >
-                    <span className="text-[#a35f4b]">✗</span>
-
+                    <span className="text-[#a35f4b]">x</span>
                     <span className="capitalize">{ingredient}</span>
                   </li>
                 ))}
@@ -281,11 +194,8 @@ function ShoppingListPage({ token }) {
         </div>
       ) : (
         <div className="mt-6 space-y-6">
-          {getSortedCategories(groupedData).map((category) => (
-            <div
-              key={category}
-              className="rounded-3xl bg-white p-6 shadow-sm"
-            >
+          {getSortedShoppingCategories(groupedData).map((category) => (
+            <div key={category} className="rounded-3xl bg-white p-6 shadow-sm">
               <h2 className="mb-4 border-b border-[#dbe7de] pb-3 text-2xl font-semibold text-[#1f5c4d]">
                 {category}
               </h2>
@@ -296,8 +206,7 @@ function ShoppingListPage({ token }) {
                     key={idx}
                     className="flex items-center gap-3 text-lg text-[#1f5c4d]"
                   >
-                    <span className="text-[#a35f4b]">✗</span>
-
+                    <span className="text-[#a35f4b]">x</span>
                     <span className="capitalize">{ingredient}</span>
                   </li>
                 ))}
