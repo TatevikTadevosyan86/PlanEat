@@ -210,12 +210,14 @@ const meals = [
       { name: 'eggs', quantity: '2', unit: '' },
       { name: 'rice', quantity: '2', unit: 'cups' },
       { name: 'soy sauce', quantity: '2', unit: 'tbsp' },
-      { name: 'vegetables', quantity: '100', unit: 'g' },
-      { name: 'leftover meat', quantity: '150', unit: 'g' }
+      { name: 'carrot', quantity: '1', unit: '' },
+      { name: 'peas', quantity: '50', unit: 'g' },
+      { name: 'corn', quantity: '50', unit: 'g' },
+      { name: 'chicken', quantity: '150', unit: 'g' }
     ],
     instructions: [
       'Scramble eggs in a wok',
-      'Add leftover meat and vegetables',
+      'Add cooked chicken and vegetables',
       'Add cooked rice and stir fry',
       'Add soy sauce and mix well',
       'Cook for 3-5 minutes until hot'
@@ -256,7 +258,7 @@ const meals = [
       { name: 'potato', quantity: '2', unit: '' },
       { name: 'tomato', quantity: '2', unit: '' },
       { name: 'broth', quantity: '500', unit: 'ml' },
-      { name: 'any vegetables', quantity: '200', unit: 'g' }
+      { name: 'zucchini', quantity: '1', unit: '' }
     ],
     instructions: [
       'Dice all vegetables',

@@ -52,7 +52,7 @@ describe('Integration: Authentication API', () => {
         name: 'Duplicate User'
       })
     
-    // Your backend returns 409 for duplicate email
+    // Backend returns 409 for duplicate email
     expect(res.status).toBe(409)
     expect(res.body.message).toContain('already exists')
   })
@@ -96,7 +96,7 @@ describe('Integration: Authentication API', () => {
       })
     
     expect(res.status).toBe(401)
-    // Match the actual message from your backend
+    // Match the actual message from  backend
     expect(res.body.message).toBe('Invalid email or password.')
   })
 
