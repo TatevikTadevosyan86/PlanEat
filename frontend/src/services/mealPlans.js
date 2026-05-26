@@ -19,10 +19,13 @@ export async function createMealPlan(mealPlan, token) {
   return response.data
 }
 
-export async function getLatestMealPlan(token) {
+export async function getLatestMealPlan(token, planningMode) {
   const response = await axios.get(
     `${apiBaseUrl}/meal-plans/latest`,
-    getAuthConfig(token)
+    {
+      ...getAuthConfig(token),
+      params: planningMode ? { planningMode } : undefined,
+    }
   )
   return response.data
 }
