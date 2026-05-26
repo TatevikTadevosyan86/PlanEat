@@ -8,6 +8,12 @@ import {
   getSortedShoppingCategories,
 } from '../utils/shoppingList.js'
 
+/**
+ * Displays the shopping list for the latest saved meal plan and groups missing items for easier shopping.
+ *
+ * @param {{ token: string }} props
+ * @returns {JSX.Element}
+ */
 function ShoppingListPage({ token }) {
   const [mealPlan, setMealPlan] = useState([])
   const [isLoadingMealPlan, setIsLoadingMealPlan] = useState(true)
@@ -34,6 +40,7 @@ function ShoppingListPage({ token }) {
     loadLatestMealPlan()
   }, [token])
 
+  // Category view combines missing ingredients from all meals into one deduplicated list.
   const groupByCategory = () => {
     const grouped = {}
 
@@ -59,6 +66,7 @@ function ShoppingListPage({ token }) {
     return grouped
   }
 
+  // Day view keeps the shopping list tied to the individual meal scheduled for that day.
   const groupByDay = () => {
     const days = [
       'Monday',

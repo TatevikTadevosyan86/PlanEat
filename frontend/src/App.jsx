@@ -12,15 +12,19 @@ import { getCurrentUser } from './services/auth.js'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import { useEffect, useState } from 'react'
 
-
-
-
+/**
+ * Top-level application component that restores auth state and wires all routes together.
+ *
+ * @returns {JSX.Element}
+ */
 function App() {
   const [planningMode, setPlanningMode] = useState('smart')
   const [user, setUser] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'))
   const [isCheckingAuth, setIsCheckingAuth] = useState(true)
-    useEffect(() => {
+
+  // Restore the logged-in user from the saved JWT before rendering protected routes.
+  useEffect(() => {
     async function restoreSession() {
       if (!token) {
         setIsCheckingAuth(false)
@@ -51,11 +55,12 @@ function App() {
       </div>
     )
   }
-function handleLogout() {
-  localStorage.removeItem('token')
-  setToken(null)
-  setUser(null)
-}
+
+  function handleLogout() {
+    localStorage.removeItem('token')
+    setToken(null)
+    setUser(null)
+  }
 
   return (
     <BrowserRouter>

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Each embedded meal stores the generated snapshot shown in the weekly plan and shopping list.
 const mealSchema = new mongoose.Schema(
   {
     day: {
@@ -7,7 +8,7 @@ const mealSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-     recipeId: { 
+    recipeId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
@@ -33,15 +34,12 @@ const mealSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    image: {                       
+    image: {
       type: String,
       default: '',
     },
-    
   },
-  
-  { _id: true } 
-
+  { _id: true }
 );
 
 const mealPlanSchema = new mongoose.Schema(
@@ -56,11 +54,10 @@ const mealPlanSchema = new mongoose.Schema(
       default: [],
     },
     userId: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'User',
-  required: true,
-},
-
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
   {
     timestamps: true,

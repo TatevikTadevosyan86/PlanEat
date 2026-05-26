@@ -1,3 +1,17 @@
+/**
+ * Renders the ingredient form used on the inventory page.
+ *
+ * @param {{
+ *   ingredientName: string,
+ *   setIngredientName: (value: string) => void,
+ *   ingredientType: string,
+ *   setIngredientType: (value: string) => void,
+ *   ingredientState: string,
+ *   setIngredientState: (value: string) => void,
+ *   onAddIngredient: (event: React.FormEvent<HTMLFormElement>) => void
+ * }} props
+ * @returns {JSX.Element}
+ */
 function AddIngredient({
   ingredientName,
   setIngredientName,
@@ -47,25 +61,28 @@ function AddIngredient({
             </button>
           </div>
         </div>
+
+        {/* Leftover ingredients need one extra state so the planner can treat them differently. */}
         {ingredientType === 'leftover' && (
-<div className="mt-6">
-          <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">State</p>
-          <select
-            value={ingredientState}
-            onChange={(event) => setIngredientState(event.target.value)}
-            className="w-full rounded-2xl border border-[#d9e7dd] px-5 py-4 text-lg text-[#1f5c4d] outline-none"
-          >
-             <option value="">Select state</option>
-            <option value="boiled">Boiled</option>
-            <option value="steamed">Steamed</option>
-            <option value="fried">Fried</option>
-            <option value="baked">Baked</option>
-            <option value="grilled">Grilled</option>
-            <option value="chopped">Chopped</option>
-            <option value="cooked">Cooked</option>
-          </select>
-        </div>
+          <div className="mt-6">
+            <p className="mb-3 text-xl font-semibold text-[#1f5c4d]">State</p>
+            <select
+              value={ingredientState}
+              onChange={(event) => setIngredientState(event.target.value)}
+              className="w-full rounded-2xl border border-[#d9e7dd] px-5 py-4 text-lg text-[#1f5c4d] outline-none"
+            >
+              <option value="">Select state</option>
+              <option value="boiled">Boiled</option>
+              <option value="steamed">Steamed</option>
+              <option value="fried">Fried</option>
+              <option value="baked">Baked</option>
+              <option value="grilled">Grilled</option>
+              <option value="chopped">Chopped</option>
+              <option value="cooked">Cooked</option>
+            </select>
+          </div>
         )}
+
         <button
           type="submit"
           className="mt-8 w-full rounded-2xl bg-[#1f5c4d] px-6 py-4 text-xl font-semibold text-white"

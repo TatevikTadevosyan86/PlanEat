@@ -1,6 +1,7 @@
 // backend/tests/auth.test.js
 import { describe, it, expect } from 'vitest'
 
+// These unit tests isolate small auth rules so validation logic is easy to understand without the full API stack.
 // ============ REGISTER TESTS ============
 describe('User Registration', () => {
   // Simple validation functions 

@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import { app } from '../../server.js'
 import { clearDatabase, closeDatabase } from '../helpers/dbHelper.js'
 
-// Integration tests for Ingredients API
+// Focuses on the authenticated inventory endpoints and the duplicate checks around them.
 describe('Integration: Ingredients API', () => {
   let authToken
   let testEmail

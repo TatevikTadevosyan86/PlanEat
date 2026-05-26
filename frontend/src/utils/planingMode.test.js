@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
+// This small suite keeps the mode labels readable and easy to change later.
 describe('Planning Mode', () => {
   function getModeDescription(mode) {
     if (mode === 'smart') return 'Batch cooking - reuse ingredients'

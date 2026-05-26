@@ -6,8 +6,7 @@ const auth = require('../middleware/auth');
 const router = express.Router();
 router.use(auth);
 
-
-
+// Returns the latest saved plan for the authenticated user, optionally limited to one planning mode.
 router.get('/latest', async (req, res, next) => {
   try {
     const query = {
@@ -34,6 +33,7 @@ router.get('/latest', async (req, res, next) => {
   }
 });
 
+// Saves a generated meal plan snapshot for the authenticated user.
 router.post('/', async (req, res, next) => {
   try {
     const { planningMode, meals } = req.body;

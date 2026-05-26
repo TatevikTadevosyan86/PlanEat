@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-
+// Keeps the lightweight category mapping behavior explicit while the shopping list UI evolves.
 const ingredientCategories = {
   chicken: '🍗 Protein',
   'ground beef': '🍗 Protein',

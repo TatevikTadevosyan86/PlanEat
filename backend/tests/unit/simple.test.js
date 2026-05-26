@@ -3,6 +3,7 @@ import { describe, it, expect } from 'vitest'
 import request from 'supertest'
 import { app } from '../../server.js'
 
+// Smoke tests verify that the app boots and exposes the basic health endpoints expected by tooling.
 describe('Simple API Tests', () => {
   it('GET / returns welcome message', async () => {
     const res = await request(app).get('/')

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-
+// Mirrors the early planner scoring rules in isolation so the mode bonuses stay understandable.
 describe('Meal Score Calculation', () => {
   function calculateScore(mealIngredients, userIngredients, planningMode, isLeftover) {
     let score = 0

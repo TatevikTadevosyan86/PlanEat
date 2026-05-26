@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
+// Verifies the deduplication rules behind the simple shopping list creation helper.
 describe('Shopping List Creation', () => {
   function createShoppingList(meals, userIngredients) {
     const allMissing = []

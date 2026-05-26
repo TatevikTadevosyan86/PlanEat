@@ -1,24 +1,30 @@
 const express = require('express');
+
 const Ingredient = require('../models/Ingredient');
 const auth = require('../middleware/auth');
 
 const router = express.Router();
+
+// Every inventory route is user-scoped through JWT auth.
 router.use(auth);
 
+// Returns the signed-in user's inventory, newest first for easier review in the UI.
 router.get('/', async (req, res, next) => {
   try {
     const ingredients = await Ingredient.find({
       userId: req.user.userId,
     }).sort({ createdAt: -1 });
+
     res.json(ingredients);
   } catch (error) {
     next(error);
   }
 });
 
+// Creates a user-owned inventory item and only stores leftover state when it is relevant.
 router.post('/', async (req, res, next) => {
   try {
-    const { name, type = 'fresh', state } = req.body;  // ← added state
+    const { name, type = 'fresh', state } = req.body;
 
     const trimmedName = name?.trim();
 
@@ -28,7 +34,6 @@ router.post('/', async (req, res, next) => {
       });
     }
 
-    // Check duplicate ingredient
     const existingIngredient = await Ingredient.findOne({
       userId: req.user.userId,
       name: new RegExp(`^${trimmedName}$`, 'i'),
@@ -41,14 +46,12 @@ router.post('/', async (req, res, next) => {
       });
     }
 
-    // Build ingredient data
     const ingredientData = {
       userId: req.user.userId,
       name: trimmedName,
       type,
     };
 
-    // Only add state if type is 'leftover' and state is provided
     if (type === 'leftover' && state) {
       ingredientData.state = state;
     }
@@ -60,6 +63,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+// Deletes only ingredients owned by the current user to prevent cross-account access.
 router.delete('/:id', async (req, res, next) => {
   try {
     const ingredient = await Ingredient.findOneAndDelete({

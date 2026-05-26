@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import { app } from '../../server.js'
 import { clearDatabase, closeDatabase } from '../helpers/dbHelper.js'
 
+// Covers the full request/response flow for registration and login against the real Express app.
 describe('Integration: Authentication API', () => {
   beforeAll(async () => {
     if (mongoose.connection.readyState === 0) {

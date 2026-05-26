@@ -1,5 +1,13 @@
 const jwt = require('jsonwebtoken');
 
+/**
+ * Verifies JWT access tokens and attaches the authenticated user payload to the request.
+ *
+ * @param {import('express').Request} req
+ * @param {import('express').Response} res
+ * @param {import('express').NextFunction} next
+ * @returns {void}
+ */
 function auth(req, res, next) {
   const authHeader = req.headers.authorization;
 

@@ -1,9 +1,11 @@
 const express = require('express');
-const router = express.Router();
+
 const Recipe = require('../models/Recipe');
 
-// GET all recipes
-router.get('/', async (req, res) => {
+const router = express.Router();
+
+// Recipe collection is public to the authenticated frontend because meal planning depends on reading the catalog.
+router.get('/', async (_req, res) => {
   try {
     const recipes = await Recipe.find().sort({ name: 1 });
     res.json(recipes);
@@ -13,13 +15,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET single recipe by ID
 router.get('/:id', async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
+
     if (!recipe) {
       return res.status(404).json({ message: 'Recipe not found' });
     }
+
     res.json(recipe);
   } catch (error) {
     console.error(error);

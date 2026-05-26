@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
+// Documents the simple missing-ingredient behavior used by earlier planner iterations.
 describe('Missing Ingredients', () => {
   function findMissingIngredients(recipeIngredients, userIngredients) {
     return recipeIngredients.filter(ing => !userIngredients.includes(ing.toLowerCase()))

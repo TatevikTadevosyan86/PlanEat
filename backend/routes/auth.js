@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const auth = require('../middleware/auth');
 
-
+// Creates a new user account after validating basic registration input.
 router.post('/register', async (req, res, next) => {
   try {
     const { email, password, name } = req.body;
@@ -52,6 +52,7 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
+// Authenticates a user and returns a JWT plus the public user payload.
 router.post('/login', async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -104,6 +105,8 @@ router.post('/login', async (req, res, next) => {
     next(error);
   }
 });
+
+// Returns the currently authenticated user for frontend session restoration.
 router.get('/me', auth, async (req, res, next) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
@@ -125,7 +128,5 @@ router.get('/me', auth, async (req, res, next) => {
     next(error);
   }
 });
-
-
 
 module.exports = router;

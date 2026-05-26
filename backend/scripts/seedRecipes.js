@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const Recipe = require('../models/Recipe');
 
-// Your 12 meals in the new format
+// Seeds the recipe collection with the default demo meals used by local development and demos.
 const meals = [
   {
     name: 'Chicken Rice Bowl',

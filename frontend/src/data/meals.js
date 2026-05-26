@@ -1,3 +1,4 @@
+// Legacy static meal data kept as a simple fallback/example dataset for early planner development.
 export const meals = [
   {
     id: 1,

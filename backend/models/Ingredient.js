@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Inventory items belong to one authenticated user and can optionally describe the state of leftovers.
 const ingredientSchema = new mongoose.Schema(
   {
     name: {
@@ -16,15 +17,13 @@ const ingredientSchema = new mongoose.Schema(
     state: {
       type: String,
       enum: ['boiled', 'steamed', 'fried', 'baked', 'grilled', 'chopped', 'cooked'],
-      
+    },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
   },
-  userId: {
-  type: mongoose.Schema.Types.ObjectId,
-  ref: 'User',
-  required: true,
-},
-
-},
   {
     timestamps: true,
   }

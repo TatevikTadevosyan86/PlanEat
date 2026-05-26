@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import { getCleanIngredientName } from './shoppingList.js'
 
+// These tests cover the small text-cleaning helper used before shopping list items are displayed.
 describe('getCleanIngredientName', () => {
   
   it('removes quantity and unit from ingredient name', () => {

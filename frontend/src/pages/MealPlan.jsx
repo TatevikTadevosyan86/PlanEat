@@ -9,6 +9,13 @@ import {
   ingredientNamesMatch,
 } from '../utils/shoppingList.js'
 
+/**
+ * Fresh mode prefers a wider spread of main ingredients before filling remaining slots by score.
+ *
+ * @param {Array<Object>} scoredMeals
+ * @param {number} limit
+ * @returns {Array<Object>}
+ */
 function selectFreshMeals(scoredMeals, limit) {
   const sortedMeals = [...scoredMeals].sort((a, b) => b.score - a.score)
   const selectedMeals = []
@@ -44,6 +51,12 @@ function selectFreshMeals(scoredMeals, limit) {
   return selectedMeals
 }
 
+/**
+ * Generates and displays meal plans based on the current inventory and selected planning mode.
+ *
+ * @param {{ planningMode: string, token: string }} props
+ * @returns {JSX.Element}
+ */
 function MealPlan({ planningMode, token }) {
   const [ingredients, setIngredients] = useState([])
   const [recipes, setRecipes] = useState([])
@@ -84,6 +97,7 @@ function MealPlan({ planningMode, token }) {
     loadData()
   }, [token])
 
+  // Reload the latest saved plan when the selected mode changes so the UI doesn't show a stale mode snapshot.
   useEffect(() => {
     async function loadSavedMealPlan() {
       try {
@@ -140,6 +154,7 @@ function MealPlan({ planningMode, token }) {
 
     const scoredMeals = recipes.map((meal) => {
       let score = meal.ingredients.reduce((total, ingredient) => {
+        // Match against normalized inventory names so the shopping list only includes truly missing ingredients.
         const hasIngredient = availableIngredientNames.some(
           (availableIngredient) =>
             ingredientNamesMatch(availableIngredient, ingredient.name)
@@ -155,6 +170,7 @@ function MealPlan({ planningMode, token }) {
       if (planningMode === 'smart' && meal.usesLeftover) score += 3
       if (planningMode === 'fresh' && meal.usesLeftover) score -= 4
 
+      // Save only the ingredients that could not be satisfied by the current inventory.
       const missingIngredients = meal.ingredients
         .filter(
           (ingredient) =>
@@ -195,7 +211,7 @@ function MealPlan({ planningMode, token }) {
       score: meal.score,
       image: meal.image,
     }))
-console.log('Meals being saved to backend:', mealsWithDays)
+    console.log('Meals being saved to backend:', mealsWithDays)
 
     try {
       await createMealPlan(

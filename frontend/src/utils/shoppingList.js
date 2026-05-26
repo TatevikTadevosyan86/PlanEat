@@ -1,12 +1,24 @@
+/**
+ * Removes quantities and common units so ingredient names can be displayed and compared consistently.
+ *
+ * @param {string} ingredient
+ * @returns {string}
+ */
 export function getCleanIngredientName(ingredient) {
   return ingredient
     .replace(
-      /\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cups|cup|clove|cloves)?/gi,
+      /\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cups|cup|cloves|clove)?/gi,
       ''
     )
     .trim()
 }
 
+/**
+ * Normalizes ingredient names for matching by cleaning units, lowercasing, and removing flexible words.
+ *
+ * @param {string} ingredient
+ * @returns {string}
+ */
 export function normalizeIngredientName(ingredient) {
   return getCleanIngredientName(ingredient)
     .toLowerCase()
@@ -15,6 +27,13 @@ export function normalizeIngredientName(ingredient) {
     .trim()
 }
 
+/**
+ * Checks whether an inventory ingredient can satisfy a recipe ingredient.
+ *
+ * @param {string} availableIngredient
+ * @param {string} recipeIngredient
+ * @returns {boolean}
+ */
 export function ingredientNamesMatch(availableIngredient, recipeIngredient) {
   const normalizedAvailable = normalizeIngredientName(availableIngredient)
   const normalizedRecipe = normalizeIngredientName(recipeIngredient)
@@ -42,6 +61,7 @@ export function ingredientNamesMatch(availableIngredient, recipeIngredient) {
   return false
 }
 
+// Shared category map used by the shopping list page and tests.
 const ingredientCategories = {
   chicken: 'Protein',
   'ground beef': 'Protein',
@@ -78,6 +98,12 @@ const ingredientCategories = {
   spice: 'Other',
 }
 
+/**
+ * Maps an ingredient name to the shopping-list category it should be displayed under.
+ *
+ * @param {string} ingredientName
+ * @returns {string}
+ */
 export function getIngredientCategory(ingredientName) {
   const normalizedName = normalizeIngredientName(ingredientName)
 
@@ -85,21 +111,27 @@ export function getIngredientCategory(ingredientName) {
     return 'Vegetables'
   }
 
-const sortedEntries = Object.entries(ingredientCategories).sort(
-  ([a], [b]) => b.length - a.length
-)
+  // Match longer keys first so "tomato sauce" is categorized before the generic "tomato".
+  const sortedEntries = Object.entries(ingredientCategories).sort(
+    ([a], [b]) => b.length - a.length
+  )
 
-for (const [key, category] of sortedEntries) {
-  if (normalizedName.includes(key)) {
-    return category
+  for (const [key, category] of sortedEntries) {
+    if (normalizedName.includes(key)) {
+      return category
+    }
   }
-}
-
 
   const mainName = normalizedName.split(' ')[0]
   return ingredientCategories[mainName] || 'Other'
 }
 
+/**
+ * Sorts category names into the order used by the shopping list UI.
+ *
+ * @param {Record<string, unknown>} data
+ * @returns {string[]}
+ */
 export function getSortedShoppingCategories(data) {
   const order = [
     'Protein',

@@ -1,9 +1,10 @@
-const mealPlanRoutes = require('./routes/mealPlans');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
+
 const ingredientRoutes = require('./routes/ingredients');
+const mealPlanRoutes = require('./routes/mealPlans');
 const recipeRoutes = require('./routes/recipes');
 const authRoutes = require('./routes/auth');
 
@@ -22,6 +23,7 @@ app.get('/', (_req, res) => {
   });
 });
 
+// Lightweight health endpoint used by local checks, deployment smoke tests, and integration tests.
 app.get('/api/health', (_req, res) => {
   res.json({
     status: 'ok',
@@ -42,12 +44,14 @@ app.get('/api/db-status', (_req, res) => {
     2: 'connecting',
     3: 'disconnecting',
   };
+
   res.json({
     status: states[dbState] || 'unknown',
     readyState: dbState,
   });
 });
 
+// Explicit 404 handler keeps unknown routes consistent for both frontend debugging and API tests.
 app.use((req, res) => {
   res.status(404).json({
     message: `Route ${req.method} ${req.originalUrl} not found.`,
@@ -61,6 +65,11 @@ app.use((err, _req, res, _next) => {
   });
 });
 
+/**
+ * Connects the backend to MongoDB when a connection string is configured.
+ *
+ * @returns {Promise<void>}
+ */
 async function connectToDatabase() {
   const mongoUri = process.env.DB_CONNECTION_STRING;
 
@@ -72,24 +81,29 @@ async function connectToDatabase() {
   await mongoose.connect(mongoUri, {
     serverSelectionTimeoutMS: 5000,
   });
-  console.log('✅ MongoDB connected successfully.');
+  console.log('MongoDB connected successfully.');
 }
 
 let server;
 
+/**
+ * Starts the API after the database layer has had a chance to initialize.
+ *
+ * @returns {Promise<void>}
+ */
 async function startServer() {
   try {
     await connectToDatabase();
 
     server = app.listen(port, () => {
-      console.log(`🚀 Server listening on http://localhost:${port}`);
+      console.log(`Server listening on http://localhost:${port}`);
     });
   } catch (error) {
     console.error('Failed to start backend:', error.message);
     process.exit(1);
   }
 }
+
 startServer();
 
-// Export for testing
 module.exports = { app, server };
