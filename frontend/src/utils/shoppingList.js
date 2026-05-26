@@ -1,6 +1,9 @@
 export function getCleanIngredientName(ingredient) {
   return ingredient
-    .replace(/\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cups|cup)?/gi, '')
+    .replace(
+      /\s*\d+(?:\.\d+)?\s*(?:g|kg|ml|l|tbsp|tsp|cups|cup|clove|cloves)?/gi,
+      ''
+    )
     .trim()
 }
 
@@ -82,11 +85,16 @@ export function getIngredientCategory(ingredientName) {
     return 'Vegetables'
   }
 
-  for (const [key, category] of Object.entries(ingredientCategories)) {
-    if (normalizedName.includes(key)) {
-      return category
-    }
+const sortedEntries = Object.entries(ingredientCategories).sort(
+  ([a], [b]) => b.length - a.length
+)
+
+for (const [key, category] of sortedEntries) {
+  if (normalizedName.includes(key)) {
+    return category
   }
+}
+
 
   const mainName = normalizedName.split(' ')[0]
   return ingredientCategories[mainName] || 'Other'
