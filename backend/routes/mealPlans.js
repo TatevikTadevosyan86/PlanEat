@@ -10,9 +10,17 @@ router.use(auth);
 
 router.get('/latest', async (req, res, next) => {
   try {
-    const latestMealPlan = await MealPlan.findOne({
-  userId: req.user.userId,
-}).sort({ createdAt: -1 });
+    const query = {
+      userId: req.user.userId,
+    }
+
+    if (req.query.planningMode) {
+      query.planningMode = req.query.planningMode
+    }
+
+    const latestMealPlan = await MealPlan.findOne(query).sort({
+      createdAt: -1,
+    })
 
     if (!latestMealPlan) {
       return res.status(404).json({
