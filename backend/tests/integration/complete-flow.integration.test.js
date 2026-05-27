@@ -6,14 +6,7 @@ import { clearDatabase, closeDatabase } from '../helpers/dbHelper.js'
 import Recipe from '../../models/Recipe.js'
 
 const testRecipes = [
-  {
-    name: 'Chicken Rice Bowl',
-    ingredients: [{ name: 'chicken', quantity: '200', unit: 'g' }],
-    mainIngredient: 'chicken',
-    usesLeftover: false,
-    cuisine: 'asian',
-    prepTime: 25,
-  },
+  
    {
       name: 'Chicken Rice Bowl',
       ingredients: [
@@ -283,35 +276,9 @@ const testRecipes = [
     }
   ];
   
-  async function seedRecipes() {
-    try {
-      // Connect to MongoDB
-      await mongoose.connect(process.env.DB_CONNECTION_STRING);
-      console.log('✅ Connected to MongoDB');
+
   
-      // Clear existing recipes
-      await Recipe.deleteMany({});
-      console.log('🗑️ Cleared existing recipes');
-  
-      // Insert new recipes
-      const result = await Recipe.insertMany(meals);
-      console.log(`✅ Added ${result.length} recipes to database`);
-  
-      // List all recipes
-      const recipes = await Recipe.find();
-      console.log('\n📋 Recipes in database:');
-      recipes.forEach((recipe) => {
-        console.log(`   - ${recipe.name} (${recipe.cuisine})`);
-      });
-  
-      process.exit(0);
-    } catch (error) {
-      console.error('❌ Error seeding recipes:', error.message);
-      process.exit(1);
-    }
-  }
-  
-]
+
 
 describe('Integration: Complete User Flow', () => {
   let authToken
@@ -322,28 +289,47 @@ describe('Integration: Complete User Flow', () => {
     }
   })
 
-  beforeEach(async () => {
-    await clearDatabase()
-    
-    // Create user
-    await request(app)
-      .post('/api/auth/register')
-      .send({
-        email: 'flow@example.com',
-        password: '123456',
-        name: 'Flow User'
-      })
-    
-    const loginRes = await request(app)
-      .post('/api/auth/login')
-      .send({
-        email: 'flow@example.com',
-        password: '123456'
-      })
-    
-    authToken = loginRes.body.token
-  })
+ beforeEach(async () => {
+  await clearDatabase()
 
+  const insertedRecipes = await Recipe.insertMany(testRecipes)
+
+console.log('Inserted recipes:', insertedRecipes.length)
+
+const recipeCount = await Recipe.countDocuments()
+
+console.log('Recipe count:', recipeCount)
+
+expect(recipeCount).toBeGreaterThan(0)
+
+  const testUser = {
+    email: `flow-${Date.now()}@example.com`,
+    password: '123456',
+    name: 'Flow User',
+  }
+
+  // Register user
+  const registerRes = await request(app)
+    .post('/api/auth/register')
+    .send(testUser)
+
+  expect(registerRes.status).toBe(201)
+
+  // Login user
+  const loginRes = await request(app)
+    .post('/api/auth/login')
+    .send({
+      email: testUser.email,
+      password: testUser.password,
+    })
+
+  console.log('Flow login status:', loginRes.status)
+  console.log('Flow login body:', loginRes.body)
+
+  expect(loginRes.status).toBe(200)
+
+  authToken = loginRes.body.token
+})
   afterAll(async () => {
     await closeDatabase()
   })

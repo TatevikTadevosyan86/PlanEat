@@ -4,10 +4,10 @@ import mongoose from 'mongoose'
 import { app } from '../../server.js'
 import { clearDatabase, closeDatabase } from '../helpers/dbHelper.js'
 
-// Focuses on the authenticated inventory endpoints and the duplicate checks around them.
+// Focuses on the authenticated inventory endpoints and duplicate checks.
 describe('Integration: Ingredients API', () => {
   let authToken
-  let testEmail
+  let testUser
 
   // Connect to MongoDB before all tests
   beforeAll(async () => {
@@ -20,31 +20,31 @@ describe('Integration: Ingredients API', () => {
   beforeEach(async () => {
     await clearDatabase()
 
-    // Generate unique email to avoid duplicate conflicts
-    testEmail = `ingredients-${Date.now()}@example.com`
+    // Shared test user used for BOTH register and login
+    testUser = {
+      email: `ingredients-${Date.now()}@example.com`,
+      password: '123456',
+      name: 'Ingredients User',
+    }
 
     // Register test user
     const registerRes = await request(app)
       .post('/api/auth/register')
-      .send({
-        email: testEmail,
-        password: '123456',
-        name: 'Ingredients User'
-      })
+      .send(testUser)
 
-    // Debug registration response
     console.log('Register status:', registerRes.status)
     console.log('Register body:', registerRes.body)
 
-    // Login user to receive JWT token
+    expect(registerRes.status).toBe(201)
+
+    // Login with SAME credentials
     const loginRes = await request(app)
       .post('/api/auth/login')
       .send({
-        email: testEmail,
-        password: '123456'
+        email: testUser.email,
+        password: testUser.password,
       })
 
-    // Debug login response
     console.log('Login status:', loginRes.status)
     console.log('Login body:', loginRes.body)
 
@@ -62,50 +62,41 @@ describe('Integration: Ingredients API', () => {
 
   // Test ingredient creation
   it('POST /api/ingredients - creates a new ingredient', async () => {
-
-    // Send request to create ingredient
     const res = await request(app)
       .post('/api/ingredients')
       .set('Authorization', `Bearer ${authToken}`)
       .send({
         name: 'chicken',
-        type: 'fresh'
+        type: 'fresh',
       })
 
-    // Expect successful creation
     expect(res.status).toBe(201)
-
-    // Verify ingredient name
     expect(res.body.name).toBe('chicken')
   })
 
   // Test duplicate ingredient validation
   it('POST /api/ingredients - rejects duplicate ingredient', async () => {
-
     // First ingredient creation should succeed
     const firstRes = await request(app)
       .post('/api/ingredients')
       .set('Authorization', `Bearer ${authToken}`)
       .send({
         name: 'chicken',
-        type: 'fresh'
+        type: 'fresh',
       })
 
     expect(firstRes.status).toBe(201)
 
-    // Attempt to create duplicate ingredient
+    // Attempt duplicate creation
     const duplicateRes = await request(app)
       .post('/api/ingredients')
       .set('Authorization', `Bearer ${authToken}`)
       .send({
         name: 'chicken',
-        type: 'fresh'
+        type: 'fresh',
       })
 
-    // Expect duplicate conflict error
     expect(duplicateRes.status).toBe(409)
-
-    // Verify duplicate error message
     expect(duplicateRes.body.message).toContain('already exists')
   })
 })
