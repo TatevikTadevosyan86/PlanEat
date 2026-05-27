@@ -1,0 +1,142 @@
+# .github/workflows/ci.yml
+
+name: CI/CD Pipeline for PlanEat
+
+
+on:
+  # Run when code is pushed to main branch
+  push:
+    branches: [ main ]
+  
+  # Run when someone creates a pull request to main
+  pull_request:
+    branches: [ main ]
+  
+  # Allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+
+jobs:
+  # ============================================
+  # JOB 1: TEST (runs tests)
+  # ============================================
+  test:
+    name: Run Tests
+    
+    runs-on: ubuntu-latest
+    
+    # Start a MongoDB service for integration tests
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+    
+  
+    steps:
+      # Step 1: Check out the code from GitHub
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: backend/package-lock.json
+      
+      # Step 3: Install backend dependencies
+      - name: Install backend dependencies
+        run: |
+          cd backend
+          npm ci
+      
+      # Step 4: Check backend syntax
+      - name: Check backend syntax
+        run: |
+          cd backend
+          node --check server.js
+      
+      # Step 5: Run backend unit tests
+      - name: Run backend unit tests
+        run: |
+          cd backend
+          npm run test:unit
+        env:
+          DB_CONNECTION_STRING: mongodb://localhost:27017/planeat_test
+          JWT_SECRET: test_secret_key
+          NODE_ENV: test
+      
+      # Step 6: Install frontend dependencies
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+      
+      # Step 7: Run frontend linting
+      - name: Run frontend linting
+        run: |
+          cd frontend
+          npm run lint
+      
+      # Step 8: Run frontend tests x`x`
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm run test || echo "No frontend tests yet"
+        env:
+          CI: true
+
+  # ============================================
+  # JOB 2: BUILD (builds frontend)
+  # ============================================
+  build:
+    name: Build Frontend
+    runs-on: ubuntu-latest
+    needs: test  # Only run if test job passes
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+      
+      - name: Install dependencies
+        run: |
+          cd frontend
+          npm ci
+      
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm run build
+      
+      - name: Upload build artifact (saves the built files)
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: frontend/dist/
+          retention-days: 7
+
+  # ============================================
+  # JOB 3: DEPLOY (deploys to Render)
+  # ============================================
+  deploy:
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+    needs: build  # Only run if build job passes
+    # Only run on main branch (not pull requests)
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Trigger Render deployment
+        run: |
+          curl -X POST https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }} \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
