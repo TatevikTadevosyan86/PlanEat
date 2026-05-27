@@ -5,10 +5,10 @@ services:
 
 variables:
   DB_CONNECTION_STRING=mongodb+srv://tatevik_db_user:uT3CPlYXePBhPQ2z@assignments-cluster.iejrpnw.mongodb.net/?appName=planeat
-  NODE_ENV: test
+  NODE_ENV:test
   JWT_SECRET=ThisIsASecretKeyForJWT
   CLIENT_URL=http://localhost:5173,http://cu2110.camp.lnu.se
-  PORT: 5000
+  PORT:5000
 
 # Defines the order of pipeline stages.
 # GitLab will not continue to the next stage if one fails.
