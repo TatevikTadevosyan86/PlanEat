@@ -1,7 +1,5 @@
 image: node:24
 
-services:
-  - mongo:7
 
 variables:
   DB_CONNECTION_STRING: "mongodb+srv://tatevik_db_user:uT3CPlYXePBhPQ2z@assignments-cluster.iejrpnw.mongodb.net/?appName=planeat"
