@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-const apiBaseUrl = import.meta.env.VITE_API_URL || '/api'
+const apiBaseUrl =
+  import.meta.env.VITE_API_URL ||
+  'https://planeat-1.onrender.com/api'
 
 /**
  * Sends a registration request for a new user account.
