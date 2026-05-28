@@ -201,7 +201,7 @@ const meals = [
     mainIngredient: 'eggs',
     usesLeftover: false,
     cuisine: 'breakfast',
-    image: '/images/recipes/omelette.png',
+    image: '/images/recipes/Omelette.png',
     prepTime: 10,
   },
   {
