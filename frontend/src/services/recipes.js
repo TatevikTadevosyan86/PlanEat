@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const apiBaseUrl = '/api';
+const apiBaseUrl =
+  import.meta.env.VITE_API_URL ||
+  'https://planeat-1.onrender.com/api';
 
 /**
  * Loads all recipes used by the meal-plan generator and recipe detail view.
