@@ -182,28 +182,7 @@ const meals = [
     image: '/images/recipes/shepherds_pie.png',
     prepTime: 45,
   },
-  {
-    name: 'Omelette',
-    ingredients: [
-      { name: 'eggs', quantity: '3', unit: '' },
-      { name: 'cheese', quantity: '50', unit: 'g' },
-      { name: 'milk', quantity: '30', unit: 'ml' },
-      { name: 'butter', quantity: '10', unit: 'g' }
-    ],
-    instructions: [
-      'Crack eggs into a bowl and whisk with milk',
-      'Heat butter in a pan over medium heat',
-      'Pour egg mixture into the pan',
-      'Sprinkle cheese on top',
-      'Cook for 2-3 minutes until set',
-      'Fold and serve'
-    ],
-    mainIngredient: 'eggs',
-    usesLeftover: false,
-    cuisine: 'breakfast',
-    image: '/images/recipes/Omelette.png',
-    prepTime: 10,
-  },
+  
   {
     name: 'Fried Rice (Leftover)',
     ingredients: [
