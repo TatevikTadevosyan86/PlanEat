@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 
 import freshImage from '../assets/fresh.png'
 import smartImage from '../assets/smart.png'
+import { Check } from 'lucide-react'
 
 /**
  * Landing page where the user chooses the planning style for the upcoming week.
@@ -55,12 +56,27 @@ function Home({ planningMode, setPlanningMode }) {
             Save time, reduce food waste, and simplify your weekly cooking.
           </p>
 
-          <ul className="mt-6 space-y-3 text-lg text-[#2e6d5b]">
-            <li>âœ“ Save time cooking</li>
-            <li>âœ“ Reduce food waste</li>
-            <li>âœ“ Lower grocery costs</li>
-            <li>âœ“ Batch cooking efficiency</li>
-          </ul>
+         <ul className="mt-6 space-y-3 text-lg text-[#2e6d5b]">
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Save time cooking</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Reduce food waste</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Lower grocery costs</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Batch cooking efficiency</span>
+  </li>
+</ul>
         </article>
 
         <article
@@ -95,11 +111,26 @@ function Home({ planningMode, setPlanningMode }) {
           </p>
 
           <ul className="mt-6 space-y-3 text-lg text-[#2e6d5b]">
-            <li>âœ“ Daily variety</li>
-            <li>âœ“ New flavors</li>
-            <li>âœ“ Creative cooking</li>
-            <li>âœ“ Fresh ingredients daily</li>
-          </ul>
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Daily variety</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>New flavors</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Creative cooking</span>
+  </li>
+
+  <li className="flex items-center gap-2">
+    <Check size={16} />
+    <span>Fresh ingredients daily</span>
+  </li>
+</ul>
         </article>
       </section>
 
