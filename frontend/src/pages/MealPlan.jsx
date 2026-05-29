@@ -104,7 +104,7 @@ function MealPlan({ planningMode, token }) {
         const savedPlan = await getLatestMealPlan(token, planningMode)
 
         if (savedPlan?.meals?.length > 0) {
-          const loadedMeals = savedPlan.meals.map((meal, index) => ({
+          const loadedMeals = savedPlan.meals.map((meal) => ({
   _id: meal.recipeId,
   recipeId: meal.recipeId,
   name: meal.name,
