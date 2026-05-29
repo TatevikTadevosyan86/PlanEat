@@ -109,6 +109,8 @@ async function startServer() {
   }
 }
 
-startServer();
+if (require.main === module) {
+  startServer();
+}
 
-module.exports = { app, server };
+module.exports = { app, server, connectToDatabase, startServer };

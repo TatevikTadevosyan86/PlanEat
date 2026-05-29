@@ -7,11 +7,11 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "seed": "node scripts/seedRecipes.js",
-    "test": "vitest --no-file-parallelism",
-    "test:run": "vitest run --no-file-parallelism",
-    "test:unit": "vitest tests/unit --no-file-parallelism",
-    "test:integration": "vitest tests/integration --no-file-parallelism",
-    "test:watch": "vitest --watch --no-file-parallelism"
+    "test": "vitest --pool=threads --no-file-parallelism",
+    "test:run": "vitest run --pool=threads --no-file-parallelism",
+    "test:unit": "vitest run tests/unit --pool=threads --no-file-parallelism",
+    "test:integration": "vitest run tests/integration --pool=threads --no-file-parallelism",
+    "test:watch": "vitest --watch --pool=threads --no-file-parallelism"
   },
   "keywords": [],
   "author": "",
