@@ -141,26 +141,30 @@ function Inventory({ token }) {
                   key={ingredient.id}
                   className="rounded-2xl bg-[#f6f9f7] p-4"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <IngredientIcon name={ingredient.name} size={24} />
-                    <div>
-                      <p className="text-xl text-[#1f5c4d]">
-                        {ingredient.name}
-                      </p>
-                      <p className="mt-1 text-lg capitalize text-[#8ba095]">
-                        {ingredient.type}
-                        {ingredient.state ? ` - ${ingredient.state}` : ''}
-                      </p>
-                    </div>
+                  <div className="flex items-start gap-4">
+  <div className="mt-1 shrink-0">
+    <IngredientIcon name={ingredient.name} size={24} />
+  </div>
 
-                    <button
-                      type="button"
-                      onClick={() => handleDeleteIngredient(ingredient.id)}
-                      className="text-red-400 transition hover:text-red-600"
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
+  <div className="flex-1">
+    <p className="text-xl text-[#1f5c4d]">
+      {ingredient.name}
+    </p>
+
+    <p className="mt-1 text-lg capitalize text-[#8ba095]">
+      {ingredient.type}
+      {ingredient.state ? ` - ${ingredient.state}` : ''}
+    </p>
+  </div>
+
+  <button
+    type="button"
+    onClick={() => handleDeleteIngredient(ingredient.id)}
+    className="shrink-0 text-red-400 transition hover:text-red-600"
+  >
+    <Trash2 size={20} />
+  </button>
+</div>
                 </div>
               ))
             )}
