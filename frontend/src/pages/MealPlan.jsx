@@ -204,7 +204,7 @@ function MealPlan({ planningMode, token }) {
 
     const mealsWithDays = selectedMeals.map((meal, index) => ({
       day: weekdays[index],
-      recipeId: meal._id,
+      recipeId: meal._id || meal.recipeId,
       name: meal.name,
       mainIngredient: meal.mainIngredient,
       usesLeftover: meal.usesLeftover,
@@ -298,7 +298,7 @@ function MealPlan({ planningMode, token }) {
                   </h3>
 
                   <Link
-                    to={`/meal-plan/${meal.recipeId}`}
+                    to={`/meal-plan/${meal.recipeId || meal._id}`}
                     className="mt-6 flex items-center justify-center rounded-2xl bg-[#1f5c4d] px-6 py-3 font-medium text-white transition hover:bg-[#2b6a58]"
                   >
                     View Instructions
