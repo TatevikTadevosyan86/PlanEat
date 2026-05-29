@@ -105,7 +105,7 @@ function MealPlan({ planningMode, token }) {
 
         if (savedPlan?.meals?.length > 0) {
           const loadedMeals = savedPlan.meals.map((meal, index) => ({
-  _id: `${meal.name}-${index}`,
+  _id: meal.recipeId,
   recipeId: meal.recipeId,
   name: meal.name,
             mainIngredient: meal.mainIngredient,
