@@ -18,25 +18,39 @@ function MealDetail({ token }) {
   const [userIngredients, setUserIngredients] = useState([])
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        // Recipe details and current inventory are loaded together so the ingredient badges can render immediately.
-        const [recipeRes, ingredientsRes] = await Promise.all([
-          axios.get(`/api/recipes/${id}`),
-          getIngredients(token),
-        ])
+  async function fetchData() {
+    const apiBaseUrl =
+      import.meta.env.VITE_API_URL ||
+      'https://planeat-1.onrender.com/api'
 
-        setMeal(recipeRes.data)
-        setUserIngredients(ingredientsRes.map((ingredient) => ingredient.name.toLowerCase()))
-      } catch (error) {
-        console.error('Failed to load recipe:', error)
-      } finally {
-        setLoading(false)
+    try {
+      // Load recipe details and user inventory together.
+      const [recipeRes, ingredientsRes] = await Promise.all([
+        axios.get(`${apiBaseUrl}/recipes/${id}`),
+        getIngredients(token),
+      ])
+
+      setMeal(recipeRes.data)
+
+      setUserIngredients(
+        ingredientsRes.map((ingredient) =>
+          ingredient.name.toLowerCase()
+        )
+      )
+    } catch (error) {
+      console.error('Failed to load recipe:', error)
+
+      // Gracefully handle deleted or outdated recipe IDs.
+      if (error.response?.status === 404) {
+        setMeal(null)
       }
+    } finally {
+      setLoading(false)
     }
+  }
 
-    fetchData()
-  }, [id, token])
+  fetchData()
+}, [id, token])
 
   if (loading) {
     return (

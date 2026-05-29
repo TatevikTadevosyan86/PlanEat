@@ -104,9 +104,10 @@ function MealPlan({ planningMode, token }) {
         const savedPlan = await getLatestMealPlan(token, planningMode)
 
         if (savedPlan?.meals?.length > 0) {
-          const loadedMeals = savedPlan.meals.map((meal) => ({
-            _id: meal.recipeId,
-            name: meal.name,
+          const loadedMeals = savedPlan.meals.map((meal, index) => ({
+  _id: `${meal.name}-${index}`,
+  recipeId: meal.recipeId,
+  name: meal.name,
             mainIngredient: meal.mainIngredient,
             usesLeftover: meal.usesLeftover,
             missingIngredients: meal.missingIngredients,
@@ -297,7 +298,7 @@ function MealPlan({ planningMode, token }) {
                   </h3>
 
                   <Link
-                    to={`/meal-plan/${meal._id}`}
+                    to={`/meal-plan/${meal.recipeId}`}
                     className="mt-6 flex items-center justify-center rounded-2xl bg-[#1f5c4d] px-6 py-3 font-medium text-white transition hover:bg-[#2b6a58]"
                   >
                     View Instructions
