@@ -76,6 +76,7 @@ const ingredientCategories = {
   lettuce: 'Vegetables',
   potato: 'Vegetables',
   peas: 'Vegetables',
+  zucchini:'Vegetables',
   garlic: 'Vegetables',
   basil: 'Vegetables',
   cheese: 'Dairy',
