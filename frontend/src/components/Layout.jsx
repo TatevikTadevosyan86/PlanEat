@@ -98,7 +98,7 @@ function Layout({ children, user, handleLogout }) {
                 </p>
 
                 <p className="mt-4 text-sm text-[#8ba095]">
-                  Â© 2026 PlanEat. All rights reserved.
+                   &copy; 2026 PlanEat. All rights reserved.
                 </p>
               </div>
 
@@ -121,9 +121,7 @@ function Layout({ children, user, handleLogout }) {
               </div>
             </div>
 
-            <div className="mt-8 border-t border-[#dbe7de] pt-6 text-center text-xs text-[#8ba095]">
-              <p>Made with ðŸ’š for a waste-free kitchen</p>
-            </div>
+            
           </div>
         </footer>
       </div>
