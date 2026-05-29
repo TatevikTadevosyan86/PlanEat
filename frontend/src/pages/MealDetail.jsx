@@ -93,7 +93,7 @@ function MealDetail({ token }) {
           to="/meal-plan"
           className="mb-4 inline-block rounded-full bg-[#eef9f2] px-4 py-2 text-sm text-[#1f5c4d] hover:bg-[#dcebe0]"
         >
-          â† Back to Meal Plan
+           &larr; Back to Meal Plan
         </Link>
 
         <h1 className="text-5xl font-bold text-[#173f35] md:text-6xl">
